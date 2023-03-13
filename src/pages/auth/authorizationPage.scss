@@ -1,0 +1,20 @@
+.authorization-page-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+  height: 100vh;
+}
+
+.authorization-container {
+  width: 530px;
+  min-height: 420px;
+  height: auto;
+  padding: 50px 40px;
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6%;
+}

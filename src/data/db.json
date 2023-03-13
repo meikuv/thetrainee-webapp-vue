@@ -1,0 +1,1273 @@
+{
+  "vacancy": [
+    {
+      "id": 0,
+      "companyName": "Kaspi.kz",
+      "jobName": "Middle Java Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Можно удалённо"
+        }, 
+        {
+          "id": 2,
+          "depName": "Опыт от 3 лет"
+        },
+        {
+          "id": 3,
+          "depName": "Full Time"
+        },
+        {
+          "id": 4,
+          "depName": "Алматы"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "companyName": "Google",
+      "jobName": "Java Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Опыт от 10 лет"
+        },
+        {
+          "id": 2,
+          "depName": "Full Time"
+        },
+        {
+          "id": 3,
+          "depName": "Колифорния"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "companyName": "Meta",
+      "jobName": "Frontend React Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Можно удалённо"
+        }, 
+        {
+          "id": 2,
+          "depName": "Опыт от 3 лет"
+        },
+        {
+          "id": 3,
+          "depName": "Full Time"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "companyName": "Kaspi.kz",
+      "jobName": "Middle Java Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Можно удалённо"
+        }, 
+        {
+          "id": 2,
+          "depName": "Опыт от 3 лет"
+        },
+        {
+          "id": 3,
+          "depName": "Full Time"
+        },
+        {
+          "id": 4,
+          "depName": "Алматы"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "companyName": "Google",
+      "jobName": "Java Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Опыт от 10 лет"
+        },
+        {
+          "id": 2,
+          "depName": "Full Time"
+        },
+        {
+          "id": 3,
+          "depName": "Колифорния"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "companyName": "Meta",
+      "jobName": "Frontend React Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Можно удалённо"
+        }, 
+        {
+          "id": 2,
+          "depName": "Опыт от 3 лет"
+        },
+        {
+          "id": 3,
+          "depName": "Full Time"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "companyName": "Kaspi.kz",
+      "jobName": "Middle Java Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Можно удалённо"
+        }, 
+        {
+          "id": 2,
+          "depName": "Опыт от 3 лет"
+        },
+        {
+          "id": 3,
+          "depName": "Full Time"
+        },
+        {
+          "id": 4,
+          "depName": "Алматы"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "companyName": "Google",
+      "jobName": "Java Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Опыт от 10 лет"
+        },
+        {
+          "id": 2,
+          "depName": "Full Time"
+        },
+        {
+          "id": 3,
+          "depName": "Колифорния"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "companyName": "Meta",
+      "jobName": "Frontend React Developer",
+      "companyVacancy": [
+        {
+          "id": 0,
+          "name": "Kaspi.kz",
+          "vacancy": [
+            {
+              "id": 0,
+              "name": "Middle Java Developer"
+            },
+            {
+              "id": 1,
+              "name":"React Developer"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 0,
+          "depName": "Зарплата по итогам собеседовния"
+        },
+        {
+          "id": 1,
+          "depName": "Можно удалённо"
+        }, 
+        {
+          "id": 2,
+          "depName": "Опыт от 3 лет"
+        },
+        {
+          "id": 3,
+          "depName": "Full Time"
+        }
+      ],
+      "skills": [
+        {
+          "id": 0,
+          "skillName": "Git"
+        },
+        {
+          "id": 1,
+          "skillName": "Jira"
+        }, {
+          "id": 2,
+          "skillName": "JSON"
+        },
+        {
+          "id": 3,
+          "skillName": "REST API"
+        },
+        {
+          "id": 4,
+          "skillName": "Oracle SQL"
+        }
+      ],
+      "requirements": [
+        {
+          "id": 0,
+          "reqName": "Experience in system analysis from 3 years"
+        },
+        {
+          "id": 1,
+          "reqName": "Understanding the basics of designing micro-service architecture and integration interactions of various types"
+        },
+        {
+          "id": 2,
+          "reqName": "Experience with Swagger, GIT, Jira, Confluence"
+        },
+        {
+          "id": 3,
+          "reqName": "Knowledge of basic business process modeling notations (BPMN, UML)"
+        },
+        {
+          "id": 4,
+          "reqName": "Experience with Camunda is required"
+        }, 
+        {
+          "id": 5,
+          "reqName": "Experience with REST"
+        },
+        {
+          "id": 6,
+          "reqName": "Understanding the principles of relational DBMS"
+        }
+      ],
+      "tasks": [
+        {
+          "id": 0,
+          "taskName": "Writing TOR/specifications based on business requirements"
+        }, 
+        {
+          "id": 1,
+          "taskName": "Development of new and development of existing BPM processes (Camunda)"
+        },
+        {
+          "id": 2,
+          "taskName": "Participation in the UAT of the developed functionality"
+        },
+        {
+          "id": 3,
+          "taskName": "Incident analysis"
+        }
+      ],
+      "workConditions": [
+        {
+          "id": 0,
+          "condition": "Stable work in a large Russian bank"
+        },
+        {
+          "id": 1,
+          "condition": "Official employment"
+        },
+        {
+          "id": 2,
+          "condition": "VMI from the first month of work"
+        },
+        {
+          "id": 3,
+          "condition": "Decent and stable income (salary + bonus)"
+        },
+        {
+          "id": 4,
+          "condition": "Work schedule 5/2, remote or hybrid operation is possible"
+        },
+        {
+          "id": 5,
+          "condition": "Working in a team of professionals in a friendly atmosphere"
+        },
+        {
+          "id": 6,
+          "condition": "Ambitious tasks and projects, the opportunity to influence the result of the company's technological development"
+        }
+      ]
+    }
+  ],
+  "company": [
+    {
+      "name": "Kaspi.kz",
+      "compVacancy": [
+        {
+          "id": 0,
+          "name": "Middle Java Developer"
+        },
+        {
+          "id": 1,
+          "name": "React Developer"
+        }
+      ]
+    }
+  ]
+}

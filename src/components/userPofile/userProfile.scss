@@ -1,0 +1,45 @@
+.p-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  opacity: 0;
+  transition: 0.3s;
+  animation: show 0.3s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+  height: max-content;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.p-avatar {
+  width: 9rem;
+  height: 9rem;
+  background-color:#2196F3; 
+  color: #ffffff;
+  text-align: center;
+  font-size: 65px;
+}
+
+.username-block {
+  text-align: center;
+}
+
+.username-block .username-text {
+  margin-right: 30px;
+  margin-left: 15px;
+  color: #23272a
+}

@@ -1,0 +1,186 @@
+.p-card {
+  border-radius: 10px;
+  opacity: 0;
+  transition: 0.3s;
+  animation: show 0.3s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+}
+
+.resume__header {
+  display: flex;
+}
+
+.resume__header-text {
+  margin: 25px 30px 0 15px;
+  color: #23272a;
+  font-size: x-large;
+}
+
+.resume__content {
+  width: 45em;
+}
+
+.block-column {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.2em; 
+}
+
+.block-label {
+  width: 200px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.field {
+  margin-bottom: 1em;
+}
+
+.field>label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 0.3rem;
+}
+
+.inputs_first {
+  margin-left: 40px;
+  width: 20em;
+}
+
+.inputs_second {
+  width: 15em;
+  margin-left: 40px;
+}
+
+.input_third {
+  margin-left: 40px;
+  width: 10em;
+}
+
+.inputs_fourth {
+  width: 20em;
+}
+
+.inputs_fifth {
+  width: 15em;
+  font-size: 14px;
+}
+
+.form_list .input_list {
+  padding: 10px;
+  outline: none;
+}
+
+.form_list .input_list:focus {
+  border: 1px solid rgb(22, 160, 240);
+}
+
+.form_list .btn_form {
+  color: #fff;
+  margin-left: 5px;
+  border-radius: 8px;
+  width: max-content;
+}
+
+::placeholder{
+  font-size: 12px;
+}
+
+.btn_list {
+  color: #fff;
+  border-radius: 8px;
+  width: max-content;
+  margin-left: 40px;
+}
+
+.btn_submit {
+  color: #fff;
+  border-radius: 8px;
+  width: max-content;
+}
+
+.work-exp_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.study_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.work-exp_elements {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.study_elements {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.work-exp_element {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #d4d7d9;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 2px 15px 10px;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  font-size: 12px;
+}
+
+.study_element {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #d4d7d9;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 5px 15px 5px;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  font-size: 12px;
+}
+
+.skill_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 240px;
+  margin-bottom: 16px;
+}
+
+.skill-badge {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  padding: 2px 8px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #637171;
+  border-radius: 8px;
+  background: #f2efef;
+}
+
+span {
+  margin: 5px;
+}

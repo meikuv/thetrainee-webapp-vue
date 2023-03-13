@@ -1,0 +1,266 @@
+.vacancy-wrapper {
+  // display: flex;
+  width: 700px;
+  height: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 25px;
+  grid-auto-flow: row;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-centred {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.single-post {
+  margin-bottom: 20px;
+  position: relative;
+  color: #0f1111;
+  border-radius: 18px;
+  outline: 1px solid #eaeaea;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  transition: background-color .2s ease-in-out;
+  fill: #0f1111;
+  opacity: 0;
+  transition: 0.3s;
+  animation: show 0.3s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+}
+
+.single-post .single__header {
+  padding-top: 28px;
+  padding-right: 34px;
+  padding-bottom: 28px;
+  padding-left: 34px;
+}
+
+.single__header h1 {
+  margin: 0;
+  margin-bottom: 0px;
+  margin-bottom: 16px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 35px;
+  letter-spacing: -0.015em;
+}
+
+.vacancy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  margin-top: 20px;
+}
+
+.vacancy-depend {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  padding: 2px 8px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #637171;
+  border-radius: 8px;
+  background: #f2efef;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.p-button {
+  width: 110px;
+  background-color: #1d706d;
+  border: 2px;  
+  color: #ffffff; 
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.single__content {
+  padding-right: 34px;
+  padding-bottom: 36px;
+  padding-left: 34px;
+}
+
+.content-header {
+  display: flex;
+}
+
+.skills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 0 12px;
+  line-height: 1em;
+}
+
+.skills span {
+  position: relative;
+  z-index: 9;
+  font-size: 15px;
+  font-weight: 400;;
+  line-height: 1.2;
+  color: #5c6a6a;
+  cursor: pointer;
+  transition: color .25s ease;
+  letter-spacing: 1.2;
+}
+
+.round-divider {
+  width: 4px;
+  height: 4px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: red;
+}
+
+.single__content h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0em;
+}
+
+ul li::marker {
+  color: red;
+  font-size: 1.5em;
+}
+
+.aside-right {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  margin-bottom: auto;
+  position: sticky;
+  bottom: 20px;
+  contain: content;
+  border: 1px solid #dee2e6;
+  border-radius: 18px;
+  opacity: 0;
+  transition: 0.3s;
+  animation: showAside 0.3s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes showAside {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+}
+
+.aside-right {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  margin-bottom: auto;
+  width: 330px;
+  // margin-left: 30px;
+}
+
+.box {
+  border-radius: 12px;
+  background-color: #f8f9fa;
+}
+
+.widget-about-company {
+  display: table;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+}
+
+.widget-about-company .widget-img {
+  margin-bottom: 0;
+  width: inherit;
+  border-radius: 8px;
+  height: 90px;
+}
+
+
+.widget-img {
+  width: 100%;
+  max-height: 90px;
+  margin-bottom: 10px;
+  object-fit: contain;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.widget-caption {
+  padding-top: 8px;
+  margin-bottom: 24px;
+}
+
+.widget-caption-a {
+  color: #0f1111;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.widget-text.small {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.widget-text {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.about-company-jobs-item-last-jobs:not(:last-child) {
+  border-bottom: 2px solid #f5f5f5;
+}
+.about-company-jobs-item-last-jobs {
+  margin-top: 16px;
+  text-align: center;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.about-company-jobs-title {
+  margin-bottom: 10px;
+  line-height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.about-company-jobs-title a {
+  font-family: 18px;
+  font-weight: 500;
+  color: #1a6865;
+}

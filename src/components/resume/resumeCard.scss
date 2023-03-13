@@ -1,0 +1,108 @@
+.resume-card {
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  margin-bottom: 20px;
+  width: 500px;
+}
+
+.tp-card-a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.tp-resume-card-item {
+  padding: 16px;
+}
+
+.tp-resume-card-top {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.tp-resume-card-top__left {
+  min-width: 47px;
+  max-height: 47px;
+  margin-right: 20px;
+  position: relative;
+}
+
+.tp-resume-card-image {
+  overflow: hidden;
+  width: 58px;
+  max-width: 58px;
+  max-height: 58px;
+  font-size: 0;
+  line-height: 0;
+  border-radius: 3px;
+  white-space: nowrap;
+  text-indent: 100%;
+}
+
+.tp-resume-card-company-link {
+  display: block;
+  width: auto;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 9;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: #1a6865;
+  cursor: pointer;
+  transition: opacity .25s ease;
+  letter-spacing: 1;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+}
+
+.tp-resume-card-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 2;
+  color: #313635;
+  letter-spacing: 1.5;
+}
+
+.tp-resume-card-center {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.tp-card-badge {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  padding: 2px 8px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #637171;
+  border-radius: 8px;
+  background: #f2efef;
+}
+
+.tp-resume-card-bottom {
+  display: flex;
+}
+
+.p-button {
+  width: 110px;
+  background-color: #1d706d;
+  border: 2px;  
+  color: #ffffff; 
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}

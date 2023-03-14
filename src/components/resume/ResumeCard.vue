@@ -1,30 +1,27 @@
 <template>
   <Toast :baseZIndex="100000001"/>
-  <div style="display: flex; flex-direction: row;">
-    <article class="resume-card">
-      <div class="tp-resume-card-item">
-        <div class="tp-resume-card-top">
-          <!-- <router-link
-            :to="{ name: 'resumePage', params: { id: resume.id } }"
-          > -->
-            <div class="tp-resume-card-top__right">
-              <h2 class="tp-resume-card-title">
-                {{ resume.position }}
-              </h2>
-            </div>
-          <!-- </router-link> -->
-        </div>
-        {{ resume.salary }} {{ resume.salaryMode }}
-
-        <div class="tp-resume-card-center">
-          <span class="tp-card-badge" v-for="(skill, index) in resume.coreSkills" :key="index">
-            {{ skill.skill }}
-          </span>
-        </div>
+  <article class="resume-card">
+    <div class="tp-resume-card-item">
+      <div class="tp-resume-card-top">
+        <!-- <router-link
+          :to="{ name: 'resumePage', params: { id: resume.id } }"
+        > -->
+          <div class="tp-resume-card-top__right">
+            <h2 class="tp-resume-card-title">
+              {{ resume.position }}
+            </h2>
+          </div>
+        <!-- </router-link> -->
       </div>
-    </article>
-    <i class="pi pi-trash" style="font-size: 20px; margin: 5px 20px;" @click="deleteResume(resume.id)"></i>
-  </div>
+      {{ resume.salary }} {{ resume.salaryMode }}
+
+      <div class="tp-resume-card-center">
+        <span class="tp-card-badge" v-for="(skill, index) in resume.coreSkills" :key="index">
+          {{ skill.skill }}
+        </span>
+      </div>
+    </div>
+  </article>
 </template>
 
 <script lang="ts">
@@ -41,7 +38,7 @@
         type: Object,
         default: () => {},
         required: true,
-      }
+      },
     },
     components: {
       Button,
@@ -67,7 +64,7 @@
       function deleteResume(id: number) {
         resumeStore.deleteResume(id).then(
           () => {
-            location.reload()
+            // location.reload()
           },
           error => {
             showMessage('error', 'Error Message', 'Something wrong !', 3000)

@@ -322,6 +322,7 @@
   import { defineComponent, computed, reactive, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { resumeModuleStore } from '@/store/resumeModule'
+  import { useRouter } from 'vue-router'
   import { useToast } from 'primevue/usetoast'
   import { required } from '@vuelidate/validators'
   import { useVuelidate } from '@vuelidate/core'
@@ -353,6 +354,7 @@
     },
     setup() {
       const toast = useToast()
+      const router = useRouter()
       const authUserStore = authModuleStore()
       const resumeStore = resumeModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
@@ -584,7 +586,11 @@
         resumeStore.createResume(resume).then(
           () => {
             showMessage('success', 'Success Message', 'Created successfully !', 3000)
-            resetForm()
+            setTimeout(() => {
+              router.push({
+                name: 'myResumes'
+              })
+            }, 600);
           },
           error => {
             errorMessage.value =

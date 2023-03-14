@@ -13,7 +13,6 @@ const routes = [
     path: '/register',
     name: 'register',
     component: (): Promise<RouteComponent> => import ('@pages/registration/RegistrationPage.vue'),
-    meta: { authorize: [] } 
   },
   {
     path: '/home',
@@ -110,19 +109,6 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
-
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (authModuleStore().getCurrentUser !== null) {
-//       next()
-//       return
-//     }
-//     next("/")
-//   } else if (to.matched.some((record) => record.meta.role))
-//    else {
-//     next()
-//   }
-// })
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page

@@ -37,12 +37,14 @@ class AuthService {
       .post(API_URL + '/auth/logout', { withCredentials: true })
       .then(response => {
         if (response.data.message) {
-          sessionStorage.removeItem('user')
-          sessionStorage.removeItem('currentUser')
-          sessionStorage.removeItem('role')
+          sessionStorage.clear()
           location.reload()
         }
         return response.data
+      },
+      error => {
+        sessionStorage.clear()
+        location.reload()
       })
   }
 }

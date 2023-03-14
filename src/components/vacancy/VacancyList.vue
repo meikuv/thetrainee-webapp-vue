@@ -7,7 +7,7 @@
     />
   </div>
   <div v-if="data.length === 0" class="not-found">
-    <img src="http:\\localhost:5173\src\assets\datanotfound.jpg"  width="650" height="650"/>
+    <img src="http:\\localhost:5173\src\assets\datanotfound.jpg"  width="600" height="600"/>
   </div>
 </template>
 

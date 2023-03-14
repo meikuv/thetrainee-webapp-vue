@@ -19,7 +19,9 @@
         <router-link to="/home/createVacancy" custom v-slot="{ navigate }" v-if="userRole === 'COMPANY_ROLE'">
           <Button label="Vacancy" icon="pi pi-plus" class="p-button-rounded p-button-danger" @click="navigate" role="link"/>
         </router-link>
-        <Button :label="currentUser" icon="pi pi-user" class="p-button" @click="pushToProfile"/>
+        <router-link to="//profile" custom v-slot="{ navigate }">
+          <Button :label="currentUser" icon="pi pi-user" class="p-button" @click="navigate"/>
+        </router-link>
         <Button icon="pi pi-power-off" @click="logOut"/>
       </div>
     </template>
@@ -64,13 +66,7 @@
         authUserStore.logout()
       }
 
-      function pushToProfile(): void {
-        router.push({
-          name: 'userInfo',
-        })
-      }
-
-      return { items, currentUser, userRole, authUserStore, logOut, pushToProfile }
+      return { items, currentUser, userRole, authUserStore, logOut }
     }
   })
 </script>

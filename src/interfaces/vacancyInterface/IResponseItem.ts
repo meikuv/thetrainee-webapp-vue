@@ -1,20 +1,16 @@
 export interface ISkill {
-  id: number
   skill: string
 }
 
 export interface IRequirements {
-  id: number
   reqName: string
 }
 
 export interface IDependencies {
-  id: number
   depName: string
 }
 
 export interface IWorkConditions {
-  id: number
   conName: string
 }
 

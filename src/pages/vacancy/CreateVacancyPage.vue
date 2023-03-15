@@ -1,6 +1,6 @@
-<template>
+<template> 
   <Toast :baseZIndex="100000001"/>
-  <Card style="width: 60em; margin-left: 50px; padding: 0px 24px 0 24px;">
+  <Card style="width: 55em; margin-left: 50px; padding: 0px 24px 0 24px;">
     <template #header>
       <div class="vacancy__header">
         <h4 class="vacancy__header-text">Create Vacancy</h4>
@@ -35,19 +35,20 @@
               />
             </div>
             <div class="field">
-              <label for="skill-name">Core Skills</label>
+              <label for="skill-name" :class="{'p-error': v$.basicSkills.$invalid && submitted}">Core Skills</label>
               <form class="form_list" @submit.prevent="addNew('skills')">
                 <InputText 
                   id="skill-name" 
                   class="inputs_first input_list"
                   v-tooltip.bottom="'Core skills'"
-                  v-model="v$.bSkill.$model"
+                  v-model="bSkill"
+                  :class="{'p-invalid': v$.basicSkills.$invalid && submitted}"
                   placeholder="For example: Java, SQL"
                 />
                 <Button class="btn_list" label="Add skill" type="submit"/>
               </form>
               <ul class="ul_list">
-                <li v-for="(skill, index) in basicSkills" :key="index" class="li_list">
+                <li v-for="(skill, index) in v$.basicSkills.$model" :key="index" class="li_list">
                   {{ skill.skill }} 
                   <span @click="deleteElement('skills' ,index)">
                     <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
@@ -56,19 +57,20 @@
               </ul>
             </div>
             <div class="field">
-              <label for="require">Requirements</label>
+              <label for="require" :class="{'p-error': v$.requirements.$invalid && submitted}">Requirements</label>
               <form class="form_list" @submit.prevent="addNew('require')">
                 <InputText 
                   id="require" 
                   class="inputs_second input_list"
                   v-tooltip.bottom="'Requirements'"
-                  v-model="v$.reqName.$model"
+                  v-model="reqName"
+                  :class="{'p-invalid': v$.requirements.$invalid && submitted}"
                   placeholder="For example: Knowledge of the basics of DBMS"
                 />
                 <Button class="btn_list" label="Add requirement" type="submit"/>
               </form>
               <ul class="ul_list">
-                <li v-for="(req, index) in requirements" :key="index" class="li_list">
+                <li v-for="(req, index) in v$.requirements.$model" :key="index" class="li_list">
                   {{ req.reqName}} 
                   <span @click="deleteElement('require', index)">
                     <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
@@ -77,19 +79,20 @@
               </ul>
             </div>
             <div class="field">
-              <label for="response">Dependencies</label>
+              <label for="response" :class="{'p-error': v$.dependencies.$invalid && submitted}">Dependencies</label>
               <form class="form_list" @submit.prevent="addNew('dependency')">
                 <InputText 
                   id="response" 
                   class="inputs_second input_list"
                   v-tooltip.bottom="'dependencies'"
-                  v-model="v$.depName.$model"
+                  v-model="depName"
+                  :class="{'p-invalid': v$.dependencies.$invalid && submitted}"
                   placeholder="For example: Full Time or Remote Work"
                 />
                 <Button class="btn_list" label="Add dependency" type="submit"/>
               </form>
               <ul class="ul_list">
-                <li v-for="(dep, index) in dependencies" :key="index" class="li_list">
+                <li v-for="(dep, index) in v$.dependencies.$model" :key="index" class="li_list">
                   {{ dep.depName }} 
                   <span @click="deleteElement('dependency', index)">
                     <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
@@ -98,19 +101,20 @@
               </ul>
             </div>
             <div class="field">
-              <label for="condition">Work Conditions</label>
+              <label for="condition" :class="{'p-error': v$.conditions.$invalid && submitted}">Work Conditions</label>
               <form class="form_list" @submit.prevent="addNew('condition')">
                 <InputText 
                   id="condition" 
                   class="inputs_second input_list"
                   v-tooltip.bottom="'Work Conditions'"
-                  v-model="v$.conName.$model"
+                  v-model="conName"
+                  :class="{'p-invalid': v$.conditions.$invalid && submitted}"
                   placeholder="For example: Official employment"
                 />
                 <Button class="btn_list" label="Add condition" type="submit"/>
               </form>
               <ul class="ul_list">
-                <li v-for="(con, index) in conditions" :key="index" class="li_list">
+                <li v-for="(con, index) in v$.conditions.$model" :key="index" class="li_list">
                   {{ con.conName }} 
                   <span @click="deleteElement('condition', index)">
                     <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
@@ -127,7 +131,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, reactive, computed } from 'vue'
+  import { defineComponent, onMounted, reactive, computed, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
   import { required } from '@vuelidate/validators'
@@ -149,12 +153,18 @@
       Toast,
       Card,
     },
-    setup() {
+    props: {
+      id: {
+        type: Number,
+        required: true,
+      },
+    },
+    setup(props: any) {
       const toast = useToast()
-      const basicSkills: any = ref([])
-      const requirements: any = ref([])
-      const dependencies: any = ref([])
-      const conditions: any = ref([])
+      const bSkill = ref('')
+      const reqName = ref('')
+      const depName = ref('')
+      const conName = ref('')
       const vacancyStore = vacancyModuleStore()
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
@@ -163,20 +173,20 @@
         companyName: '',
         jobName: '',
         city: '',
-        bSkill: '',
-        reqName: '',
-        depName: '',
-        conName: '',
+        basicSkills: [] as any,
+        requirements: [] as any,
+        dependencies: [] as any,
+        conditions: [] as any,
       })
 
       const rules = {
         companyName: { required },
         jobName: { required },
         city: { required },
-        bSkill: '',
-        reqName: '',
-        depName: '',
-        conName: '',
+        basicSkills: { required },
+        requirements: { required },
+        dependencies: { required },
+        conditions: { required },
       }
 
       const errorMessage = ref('')
@@ -200,49 +210,49 @@
 
       const addNew = (name: any) => {
         if (name === 'skills') {
-          if (state.bSkill) {
-            let skill = { skill: state.bSkill }
-            basicSkills.value.push(skill)
+          if (bSkill) {
+            let skill = { skill: bSkill.value }
+            state.basicSkills.push(skill)
           }
-          state.bSkill = ''
+          bSkill.value = ''
         } else if (name === 'require') {
-          if (state.reqName) {
-            let req = { reqName: state.reqName}
-            requirements.value.push(req)
+          if (reqName) {
+            let req = { reqName: reqName.value }
+            state.requirements.push(req)
           }
-          state.reqName = ''
+          reqName.value = ''
 
         } else if (name === 'dependency') {
-          if (state.depName) {
-            let dep = { depName: state.depName}
-            dependencies.value.push(dep)
+          if (depName) {
+            let dep = { depName: depName.value }
+            state.dependencies.push(dep)
           }
-          state.depName = ''
+          depName.value = ''
         } else {
-          if (state.conName) {
-            let con = { conName: state.conName}
-            conditions.value.push(con)
+          if (conName) {
+            let con = { conName: conName.value }
+            state.conditions.push(con)
           }
-          state.conName = ''
+          conName.value = ''
         }
       }
 
       const deleteElement = (name:any, index:number) => {
         if (name === 'skills') {
-          basicSkills.value.splice(index, 1)
+          state.basicSkills.splice(index, 1)
         } else if (name === "require") {
-          requirements.value.splice(index, 1)
+          state.requirements.splice(index, 1)
         } else if (name === 'dependency') {
-          dependencies.value.splice(index, 1)
+          state.dependencies.splice(index, 1)
         } else {
-          conditions.value.splice(index, 1)
+          state.conditions.splice(index, 1)
         }
       }
 
       const handleSubmit = (isFormValid: boolean) => {
         submitted.value = true
         if (!isFormValid) {
-          showMessage('error', 'Error Message', 'Fill in the required fields', 3000)
+          showMessage('error', 'Error Message', 'Fill in the required fields', 1500)
           return
         }
         createVacancy()
@@ -252,10 +262,10 @@
           state.companyName = ''
           state.city = ''
           state.jobName = ''
-          basicSkills.value = []
-          requirements.value = []
-          conditions.value = []
-          dependencies.value = []
+          state.basicSkills = []
+          state.requirements = []
+          state.conditions = []
+          state.dependencies = []
           submitted.value = false
       }
 
@@ -265,10 +275,10 @@
           companyName: state.companyName,
           jobName: state.jobName,
           city: state.city,
-          basicSkills: basicSkills.value,
-          requirements: requirements.value,
-          dependencies: dependencies.value,
-          conditions: conditions.value,
+          basicSkills: state.basicSkills,
+          requirements: state.requirements,
+          dependencies: state.dependencies,
+          conditions: state.conditions,
         } as any
         vacancyStore.createVacancy(vacancy).then(
           () => {
@@ -284,15 +294,15 @@
       }
 
       return {
-        dependencies,
         deleteElement,
-        requirements,
         handleSubmit,
         errorMessage,
-        basicSkills,
-        conditions,
         submitted,
+        reqName,
+        conName,
+        depName,
         cities,
+        bSkill,
         addNew,
         state,
         v$,

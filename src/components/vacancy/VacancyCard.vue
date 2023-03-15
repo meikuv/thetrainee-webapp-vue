@@ -30,6 +30,14 @@
           v-if="currentUser === vacancy.username && userRole === 'COMPANY_ROLE'"
           @click="deleteVacancy(vacancy.id)"
         />
+        <router-link :to="{ name: 'updVacancyPage', params: { id: vacancy.id } }" v-slot="{navigate}">
+          <Button 
+            label="Edit" class="p-btn-label" 
+            v-if="currentUser === vacancy.username && userRole === 'COMPANY_ROLE'"
+            @click="navigate"
+            style="margin-left: 10px;"
+          />
+        </router-link>
         <Button 
           label="Contact" 
           class="p-btn-label" 

@@ -75,10 +75,11 @@ export const vacancyModuleStore = defineStore('vacancy', {
           conditions: response.data.conditions,
         }
         this.$state.vacancy  = newObject
+        console.log(newObject)
         this.$state.apiDeliveredStatus = 'success'
         setTimeout(() => {
           this.changeLoaderActive(false)
-        }, 1500);
+        }, 1500)
       } catch(error) {
         this.apiDeliveredStatus = 'error'
       }
@@ -110,7 +111,7 @@ export const vacancyModuleStore = defineStore('vacancy', {
           this.$state.apiDeliveredStatus = 'success'
           setTimeout(() => {
             this.changeLoaderActive(false)
-          }, 1500);
+          }, 1500)
         }
       } catch(error) {
         this.apiDeliveredStatus = 'error'

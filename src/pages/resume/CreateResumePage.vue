@@ -458,6 +458,7 @@
         stateWork.organization =  ''
         stateWork.position = ''
         stateWork.aboutWork = ''
+        submitWorkModal.value = false
       }
 
       const resetStudyForm = () => {
@@ -465,6 +466,7 @@
         stateStudy.specialization = ''
         stateStudy.faculty =  ''
         stateStudy.gradYear = ''
+        submitStudyModal.value = false
       }
 
       const submitted = ref(false)

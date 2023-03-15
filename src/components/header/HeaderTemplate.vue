@@ -19,7 +19,7 @@
         <router-link to="/home/createVacancy" custom v-slot="{ navigate }" v-if="userRole === 'COMPANY_ROLE'">
           <Button label="Vacancy" icon="pi pi-plus" class="p-button-rounded p-button-danger" @click="navigate" role="link"/>
         </router-link>
-        <router-link to="//profile" custom v-slot="{ navigate }">
+        <router-link to="/profile" custom v-slot="{ navigate }">
           <Button :label="currentUser" icon="pi pi-user" class="p-button" @click="navigate"/>
         </router-link>
         <Button icon="pi pi-power-off" @click="logOut"/>
@@ -31,10 +31,9 @@
 <script lang="ts">
   import { defineComponent, ref, computed }from 'vue'
   import { authModuleStore } from '@/store/authModule';
-  import { useRouter } from 'vue-router'
   import SplitButton from 'primevue/splitbutton'
-  import Toolbar from 'primevue/toolbar'
   import InputText from 'primevue/inputtext'
+  import Toolbar from 'primevue/toolbar'
   import Button from 'primevue/button'
 
   export default defineComponent({
@@ -46,7 +45,6 @@
     },
 
     setup() {
-      const router = useRouter()
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))

@@ -26,7 +26,6 @@
 <script lang="ts">
   import { defineComponent, computed, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
-  import { useRouter } from 'vue-router'
   import { useToast } from 'primevue/usetoast'
   import PanelMenu from 'primevue/panelmenu'
   import Divider from 'primevue/divider'
@@ -45,7 +44,6 @@
 
     setup() {
       const toast = useToast()
-      const router = useRouter()
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))

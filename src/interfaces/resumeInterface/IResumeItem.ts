@@ -18,7 +18,6 @@ export interface IResumeItem {
 }
 
 export interface IWorkExperiences {
-  id: number
   startDate: string
   endDate: string
   organization: string
@@ -27,7 +26,6 @@ export interface IWorkExperiences {
 }
 
 export interface IStudyPlaces {
-  id: number
   institution: string
   faculty: string
   specialization: string
@@ -35,11 +33,9 @@ export interface IStudyPlaces {
 }
 
 export interface ILanguages {
-  id: number
   language: number
 }
 
 export interface ICoreSkills {
-  id: number
   skill: string
 }

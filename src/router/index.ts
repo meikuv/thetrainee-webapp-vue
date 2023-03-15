@@ -87,7 +87,13 @@ const routes = [
         path: 'myVacancy',
         name: 'myVacancy',
         component: (): Promise<RouteComponent> => import('@pages/profile/CompanyVacancySubPage.vue'),
-        meta: { authorize: ['COMPANY_ROLE'] } 
+        meta: { authorize: ['COMPANY_ROLE'] },
+      },
+      {
+        path: 'updateVacancy/:id',
+        name: 'updVacancyPage',
+        component: (): Promise<RouteComponent> => import('@pages/vacancy/UpdateVacancyPage.vue'),
+        props: castRouteParams,
       },
     ],
     meta: { authorize: [Role.User, Role.COMPANY, Role.Admin] } 

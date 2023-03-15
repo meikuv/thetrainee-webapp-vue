@@ -30,12 +30,6 @@
               {{ item.reqName }};
             </li>
           </ul>
-          <!-- <h2>Tasks</h2>
-          <ul>
-            <li v-for="(item, index) in vacancyStoreData.$state.vacancy.responsibilities" :key="index">
-              {{ item.resName }};
-            </li>
-          </ul> -->
           <h2>Work conditions</h2>
           <ul>
             <li v-for="(item, index) in vacancyStoreData.$state.vacancy.conditions" :key="index">

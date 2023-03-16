@@ -82,6 +82,13 @@ const routes = [
         path: 'myResponds',
         name: 'myResponds',
         component: (): Promise<RouteComponent> => import('@/pages/profile/UserRespondsSubPage.vue'),
+        meta: { authorize: ['USER_ROLE'] } 
+      },
+      {
+        path: 'vacancyResponds',
+        name: 'vacancyResponds',
+        component: (): Promise<RouteComponent> => import('@/pages/profile/VacancyRespondsSubPage.vue'),
+        meta: { authorize: ['COMPANY_ROLE'] } 
       },
       {
         path: 'myVacancy',

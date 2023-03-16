@@ -1,5 +1,6 @@
 <template>
   <Toast :baseZIndex="100000001"/>
+  <ConfirmPopup></ConfirmPopup>
   <article class="vacancy-card">
     <div class="tp-vacancy-card-item">
       <div class="tp-vacancy-card-top">
@@ -28,7 +29,7 @@
         <Button 
           label="Delete" class="p-btn-label" 
           v-if="currentUser === vacancy.username && userRole === 'COMPANY_ROLE'"
-          @click="deleteVacancy(vacancy.id)"
+          @click="confirm1($event, vacancy.id)"
         />
         <router-link :to="{ name: 'updVacancyPage', params: { id: vacancy.id } }" v-slot="{navigate}">
           <Button 
@@ -65,6 +66,8 @@
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
   import { useToast } from 'primevue/usetoast'
+  import { useConfirm } from 'primevue/useconfirm'
+  import ConfirmPopup from 'primevue/confirmpopup'
   import Dialog from 'primevue/dialog'
   import Button from 'primevue/button'
   import Toast from 'primevue/toast'
@@ -78,12 +81,14 @@
       }
     },
     components: {
+      ConfirmPopup,
       Dialog,
       Button,
       Toast,
     },
     setup() {
       const toast = useToast()
+      const confirm = useConfirm()
       const displayModal = ref(false)
       const authUserStore = authModuleStore()
       const vacancyStore = vacancyModuleStore()
@@ -103,10 +108,24 @@
         displayModal.value = true;
       };
 
+      const confirm1 = (event: any, id: number) => {
+        confirm.require({
+          target: event.currentTarget,
+          message: 'Are you sure you want to delete the vacancy ?',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            deleteVacancy(id)
+          },
+          reject: () => {
+            showMessage('error', 'Rejected', 'You have rejected', 2000)
+          }
+        });
+      };
+
       function deleteVacancy(id: number) {
         vacancyStore.deleteVacancy(id).then(
           () => {
-            showMessage('success', 'Success Message', 'Vacancy deleted !', 3000)
+            showMessage('info', 'Confirmed', 'Vacancy deleted', 2000)
           },
           error => {
             showMessage('error', 'Error Message', 'Something wrong !', 3000)
@@ -121,6 +140,7 @@
         currentUser,
         openModal,
         userRole,
+        confirm1,
       }
     }
   })

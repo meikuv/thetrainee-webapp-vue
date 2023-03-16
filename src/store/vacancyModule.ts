@@ -13,12 +13,17 @@ export const vacancyModuleStore = defineStore('vacancy', {
       apiDeliveredStatus: '',
       companyVacancy: {} as any,
       userVacancyList: [] as [] | IResponseItem[] as unknown | any,
-      vacancy: {} as any,
+      vacancy: {} as any | IResponseItem as any,
+    }
+  },
+  getters: {
+    getVacancy(state) {
+      return state.vacancy
     }
   },
   actions: {
     changeLoaderActive(mode: boolean) {
-      this.$state.loaderIsActive = mode
+      this.loaderIsActive = mode
     },
     async getDataFromApi() {
       try {
@@ -43,13 +48,13 @@ export const vacancyModuleStore = defineStore('vacancy', {
             return obj
           })
 
-          this.$state.data  = newObject
-          this.$state.apiDeliveredStatus = 'success'
+          this.data  = newObject
+          this.apiDeliveredStatus = 'success'
           setTimeout(() => {
             this.changeLoaderActive(false)
           }, 1500);
         } else {
-          this.$state.data  = null
+          this.data  = null
           this.changeLoaderActive(false)
         }
       } catch(error) {
@@ -60,8 +65,8 @@ export const vacancyModuleStore = defineStore('vacancy', {
     async getDataWithID(id: Number) {
       try {
         this.changeLoaderActive(true)
-        const response = await axios.get(API_URL + `/vacancy/${id}`, { withCredentials: true })
-
+        const response = await axios.get<IResponseItem>(API_URL + `/vacancy/${id}`, { withCredentials: true })
+        
         const newObject =
         {
           id: response.data.id,
@@ -74,9 +79,9 @@ export const vacancyModuleStore = defineStore('vacancy', {
           dependencies: response.data.dependencies,
           conditions: response.data.conditions,
         }
-        this.$state.vacancy  = newObject
-        console.log(newObject)
-        this.$state.apiDeliveredStatus = 'success'
+        
+        this.vacancy  = newObject
+        this.apiDeliveredStatus = 'success'
         setTimeout(() => {
           this.changeLoaderActive(false)
         }, 1500)
@@ -107,8 +112,8 @@ export const vacancyModuleStore = defineStore('vacancy', {
             return obj
           })
 
-          this.$state.data  = newObject
-          this.$state.apiDeliveredStatus = 'success'
+          this.data  = newObject
+          this.apiDeliveredStatus = 'success'
           setTimeout(() => {
             this.changeLoaderActive(false)
           }, 1500)
@@ -134,6 +139,26 @@ export const vacancyModuleStore = defineStore('vacancy', {
       conditions: [],
     }) {
       return VacancyService.createVacancy(vacancy)
+        .then(vacancy => {
+          return Promise.resolve(vacancy)
+        },
+        error => {
+          return Promise.reject(error)
+        },
+      )
+    },
+    updateVacancy(vacancy: {
+      id: number,
+      username: string,
+      companyName: string,
+      jobName: string,
+      city: string,
+      basicSkills: [],
+      requirements: [],
+      dependencies: [],
+      conditions: [],
+    }) {
+      return VacancyService.updateVacancy(vacancy)
         .then(vacancy => {
           return Promise.resolve(vacancy)
         },

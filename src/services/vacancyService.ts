@@ -31,6 +31,34 @@ class VacancyService {
     })
   }
 
+  updateVacancy(vacancy: {
+    id: number,
+    username: string,
+    companyName: string,
+    jobName: string,
+    city: string,
+    basicSkills: any,
+    requirements: any,
+    dependencies: any,
+    conditions: any,
+  }) {
+    return axios.put(API_URL + `/vacancy/update/${vacancy.id}`, {
+      vacancy: {
+        username: vacancy.username,
+        companyName: vacancy.companyName,
+        jobName: vacancy.jobName,
+        city: vacancy.city,
+        basicSkills: vacancy.basicSkills,
+        requirements: vacancy.requirements,
+        dependencies: vacancy.dependencies,
+        conditions: vacancy.conditions,
+      }
+    }, { withCredentials: true })
+    .then(response => {
+      return response.data
+    })
+  }
+
   deleteVacancy(id: number) {
     return axios.delete(API_URL + `/vacancy/delete/${id}`, { withCredentials: true })
       .then(response => {

@@ -4,6 +4,7 @@ import PrimeVue from 'primevue/config'
 import Dialog from 'primevue/dialog'
 import Tooltip from 'primevue/tooltip';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -20,6 +21,7 @@ app.use(router)
 app.use(VueAxios, axios)
 app.use(PrimeVue, {ripple: true});
 app.use(ToastService);
+app.use(ConfirmationService);
 app.directive('tooltip', Tooltip);
 app.component('Dialog', Dialog)
 app.mount('#app')

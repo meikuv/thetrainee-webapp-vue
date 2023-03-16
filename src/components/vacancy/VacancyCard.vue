@@ -25,15 +25,15 @@
         </span>
       </div>
       <div class="tp-vacancy-card-bottom">
-        <Button label="Respond" class="p-btn-label" v-if="userRole === 'USER_ROLE'" @click="openModal()"/>
+        <Button label="Respond" class="p-btn" v-if="userRole === 'USER_ROLE'" @click="openModal()"/>
         <Button 
-          label="Delete" class="p-btn-label" 
+          label="Delete" class="p-btn" 
           v-if="currentUser === vacancy.username && userRole === 'COMPANY_ROLE'"
           @click="confirm1($event, vacancy.id)"
         />
         <router-link :to="{ name: 'updVacancyPage', params: { id: vacancy.id } }" v-slot="{navigate}">
           <Button 
-            label="Edit" class="p-btn-label" 
+            label="Edit" class="p-btn" 
             v-if="currentUser === vacancy.username && userRole === 'COMPANY_ROLE'"
             @click="navigate"
             style="margin-left: 10px;"
@@ -41,10 +41,10 @@
         </router-link>
         <Button 
           label="Contact" 
-          class="p-btn-label" 
+          class="p-btn" 
           v-if="currentUser !== vacancy.username && userRole === 'COMPANY_ROLE'"
         />
-        <div class="tp-vacancy-card-skills" v-for="(skill, index) in vacancy.skills" :key="index">
+        <div class="tp-vacancy-card-skills" v-for="(skill, index) in vacancy.skills.slice(0, 4)" :key="index">
           <div class="round-divider"></div>
           <span>
             {{ skill.skill }}
@@ -54,17 +54,28 @@
     </div>
   </article>
   <Dialog header="Select resume" v-model:visible="displayModal" :style="{ width: '30vw'}" :modal="true">
-    <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    <div class="resume-card" v-for="(res, index) in resumeStore.userResumes" :key="index">
+      <div class="resume-info-text">
+        <h5 class="resume-position-text">{{ res.position }}</h5>
+        <router-link :to="{ name: 'myResumes'}">
+          <a class="view-resume-text">View resume</a>
+        </router-link>
+      </div>
+      <Button 
+        icon="pi pi-check" :loading="loading === res.id"
+        text rounded aria-label="Filter" style="font-size: 5px;" 
+        @click="respondVacancy(res.id)"
+        :key="index"
+      />
+    </div>
   </Dialog>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref } from 'vue'
+  import { defineComponent, computed, onMounted, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
+  import { resumeModuleStore } from '@/store/resumeModule'
   import { useToast } from 'primevue/usetoast'
   import { useConfirm } from 'primevue/useconfirm'
   import ConfirmPopup from 'primevue/confirmpopup'
@@ -86,12 +97,16 @@
       Button,
       Toast,
     },
-    setup() {
+    setup(props) {
+      const loading = ref(0)
+      const errorMessage = ref('')
+      const vacancy = props.vacancy
       const toast = useToast()
       const confirm = useConfirm()
       const displayModal = ref(false)
       const authUserStore = authModuleStore()
       const vacancyStore = vacancyModuleStore()
+      const resumeStore = resumeModuleStore()
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))
       const currentUser = computed(() => authUserStore.currentUser)
 
@@ -133,14 +148,49 @@
         )
       }
 
+      function respondVacancy(resumeId: number) {
+        loading.value = resumeId
+        const respond = {
+          vacancyId: vacancy.id,
+          companyName: vacancy.companyName,
+          username: currentUser.value,
+          resumeId: resumeId,
+          jobName: vacancy.jobName,
+        }
+        vacancyStore.respondVacancy(respond).then(
+          () => {
+            setTimeout(() => {
+                loading.value = 0
+                showMessage('success', 'Success', 'Responded', 2000)
+            }, 500);
+          },
+          error => {
+            errorMessage.value =
+              (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            setTimeout(() => {
+              loading.value = 0
+              showMessage('error', 'Error', errorMessage.value, 2000)
+            }, 500)
+          }
+        )
+      }
+
+      onMounted(async () => {
+        await resumeStore.getUserResumes(currentUser.value)
+      })
+
       return {
+        respondVacancy,
         authUserStore,
         deleteVacancy,
         displayModal,
         currentUser,
+        resumeStore,
         openModal,
         userRole,
         confirm1,
+        vacancy,
+        loading,
       }
     }
   })

@@ -39,7 +39,7 @@
         return compName.value
           ? allVacancy.filter(
             (vacancy: any) => 
-              !vacancy.companyName.toLowerCase().indexOf(compName.value.toLowerCase()))
+              vacancy.companyName.toLowerCase().includes(compName.value.toLowerCase()))
           : allVacancy
       }
 

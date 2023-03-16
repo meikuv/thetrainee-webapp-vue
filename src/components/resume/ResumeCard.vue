@@ -2,19 +2,21 @@
   <Toast :baseZIndex="100000001"/>
   <article class="resume-card">
     <div class="tp-resume-card-item">
-      <div class="tp-resume-card-top">
-        <!-- <router-link
-          :to="{ name: 'resumePage', params: { id: resume.id } }"
-        > -->
-          <div class="tp-resume-card-top__right">
-            <h2 class="tp-resume-card-title">
-              {{ resume.position }}
-            </h2>
+        <div class="tp-resume-card-top">
+          <div class="tp-resume-card-top__left">
+            <img src="http://localhost:5173/src/assets/icons8-user-100.png" width="64" height="64"/>
           </div>
-        <!-- </router-link> -->
-      </div>
-      {{ resume.salary }} {{ resume.salaryMode }}
-
+          <!-- <router-link
+            :to="{ name: 'resumePage', params: { id: resume.id } }"
+          > -->
+          <div class="tp-resume-card-top__right">
+            <b class="tp-resume-card-position-link">{{ resume.position }}</b>
+            <b class="tp-resume-card-title">
+              {{ resume.salary }} {{ resume.salaryMode }}
+            </b>
+          </div>
+          <!-- </router-link> -->
+        </div>
       <div class="tp-resume-card-center">
         <span class="tp-card-badge" v-for="(skill, index) in resume.coreSkills" :key="index">
           {{ skill.skill }}
@@ -64,10 +66,10 @@
       function deleteResume(id: number) {
         resumeStore.deleteResume(id).then(
           () => {
-            // location.reload()
+            showMessage('info', 'Info Message', 'Resume deleted !', 2000)
           },
           error => {
-            showMessage('error', 'Error Message', 'Something wrong !', 3000)
+            showMessage('error', 'Error Message', 'Something wrong !', 2000)
           }
         )
       }

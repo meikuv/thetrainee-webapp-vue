@@ -166,6 +166,22 @@ export const vacancyModuleStore = defineStore('vacancy', {
           return Promise.reject(error)
         },
       )
+    },
+    respondVacancy(respond: {
+      vacancyId: number,
+      companyName: string,
+      username: string,
+      resumeId: number,
+      jobName: string,
+    }) {
+      return VacancyService.respondVacancy(respond)
+        .then(respond => {
+          return Promise.resolve(respond)
+        },
+        error => {
+          return Promise.reject(error)
+        },
+      )
     }
   }
 })

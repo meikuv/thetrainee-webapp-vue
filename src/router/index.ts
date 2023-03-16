@@ -81,7 +81,7 @@ const routes = [
       {
         path: 'myResponds',
         name: 'myResponds',
-        component: (): Promise<RouteComponent> => import('@pages/profile/RespondsSubPage.vue'),
+        component: (): Promise<RouteComponent> => import('@/pages/profile/UserRespondsSubPage.vue'),
       },
       {
         path: 'myVacancy',

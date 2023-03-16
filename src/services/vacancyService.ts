@@ -66,6 +66,25 @@ class VacancyService {
         return response.data
       })
   }
+
+  respondVacancy(respond: {
+    vacancyId: number,
+    companyName: string,
+    username: string,
+    resumeId: number,
+    jobName: string,
+  }) {
+    return axios.post(API_URL + '/vacancy/respond', {
+      vacancyId: respond.vacancyId,
+      companyName: respond.companyName,
+      username: respond.username,
+      resumeId: respond.resumeId,
+      jobName: respond.jobName,
+    }, { withCredentials: true })
+    .then(response => {
+      return response.data
+    })
+  }
 }
 
 export default new VacancyService()

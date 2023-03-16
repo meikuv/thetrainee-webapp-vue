@@ -97,7 +97,7 @@ a, a:hover, a:focus, a:active {
   display: flex;
 }
 
-.p-button {
+.p-btn {
   width: 110px;
   background-color: #1d706d;
   border: 2px;  
@@ -175,4 +175,19 @@ a, a:hover, a:focus, a:active {
   letter-spacing: 0em;
   width: 100%;
   margin-bottom: 8px;
+}
+
+.resume-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.resume-position-text {
+  margin-bottom: 5px;
+}
+
+.view-resume-text {
+  color: #2196f3;
+  font-size: 12px;
 }

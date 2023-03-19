@@ -4,7 +4,7 @@
     <div class="tp-resume-card-item">
         <div class="tp-resume-card-top">
           <div class="tp-resume-card-top__left">
-            <img src="http://localhost:5173/src/assets/icons8-user-100.png" width="64" height="64"/>
+            <img src="http://localhost:5173/src/assets/man-avatar-icon-free-vector.webp" width="64" height="64"/>
           </div>
           <router-link
             :to="{ name: 'resumePage', params: { id: resume.id } }"

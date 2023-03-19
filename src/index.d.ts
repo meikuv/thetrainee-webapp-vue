@@ -6,4 +6,5 @@ declare module 'vue' {
     frameBorder?: string
   }
 }
+
 export default vue

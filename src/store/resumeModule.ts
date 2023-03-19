@@ -71,7 +71,7 @@ export const resumeModuleStore = defineStore('resume', {
           aboutMe: response.data.aboutMe,
           coreSkills: response.data.coreSkills,
           workExps: response.data.workExperiences,
-          studyPlace: response.data.studyPlaces,
+          studyPlaces: response.data.studyPlaces,
           languages: response.data.languages,          
         }
         

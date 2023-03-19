@@ -6,16 +6,16 @@
           <div class="tp-resume-card-top__left">
             <img src="http://localhost:5173/src/assets/icons8-user-100.png" width="64" height="64"/>
           </div>
-          <!-- <router-link
+          <router-link
             :to="{ name: 'resumePage', params: { id: resume.id } }"
-          > -->
-          <div class="tp-resume-card-top__right">
-            <b class="tp-resume-card-position-link">{{ resume.position }}</b>
-            <b class="tp-resume-card-title">
-              {{ resume.salary }} {{ resume.salaryMode }}
-            </b>
-          </div>
-          <!-- </router-link> -->
+          >
+            <div class="tp-resume-card-top__right">
+              <b class="tp-resume-card-position-link">{{ resume.position }}</b>
+              <b class="tp-resume-card-title">
+                {{ resume.salary }} {{ resume.salaryMode }}
+              </b>
+            </div>
+          </router-link>
         </div>
       <div class="tp-resume-card-center">
         <span class="tp-card-badge" v-for="(skill, index) in resume.coreSkills" :key="index">

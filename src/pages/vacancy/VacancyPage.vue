@@ -4,7 +4,7 @@
   </div>
   <div class="vacancy-wrapper">
     <div v-if="!vacancyStoreData.$state.loaderIsActive && vacancyStoreData.$state.vacancy">
-      <article class="single-post">
+      <article class="single-vacancy">
         <div class="single__header">
           <h1 itemprop="headline">{{ vacancyStoreData.$state.vacancy.jobName }}</h1>
           <div class="vacancy-meta">

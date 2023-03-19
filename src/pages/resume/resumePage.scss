@@ -1,0 +1,78 @@
+.resume-wrapper {
+  width: 900px;
+  height: 100%;
+  margin-left: 50px;
+  margin-right: 30px;
+  margin-bottom: 25px;
+  grid-auto-flow: row;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-centred {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+}
+
+.single-resume {
+  margin-bottom: 20px;
+  position: relative;
+  color: #0f1111;
+  border-radius: 18px;
+  outline: 1px solid #eaeaea;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  transition: background-color .2s ease-in-out;
+  fill: #0f1111;
+  opacity: 0;
+  transition: 0.3s;
+  animation: show 0.3s 1;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+}
+
+.single-resume .single__header {
+  padding-top: 10px;
+  padding-right: 34px;
+  padding-bottom: 28px;
+  padding-left: 34px;
+}
+
+.single__header h3 {
+  margin: 0;
+  margin-bottom: 16px;
+  margin-top: 10px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.single__header-personal span {
+  font-size: 12px;
+}
+
+.resume-personal-gender {
+  color: rgb(22, 160, 240);
+}
+
+.resume-personal-birthDate {
+  color: rgb(22, 160, 240);
+}
+
+.contact-text {
+  font-size: 12px;
+  color: rgb(75, 79, 81);
+}
+
+.single__header-contact span {
+  font-size: 12px; 
+}

@@ -67,8 +67,7 @@ export const vacancyModuleStore = defineStore('vacancy', {
         this.changeLoaderActive(true)
         const response = await axios.get<IResponseItem>(API_URL + `/vacancy/${id}`, { withCredentials: true })
         
-        const newObject =
-        {
+        const newObject = {
           id: response.data.id,
           username: response.data.username,
           companyName: response.data.companyName,

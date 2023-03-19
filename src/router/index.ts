@@ -31,6 +31,12 @@ const routes = [
         props: castRouteParams,
       },
       {
+        path: 'resume/:id',
+        name: 'resumePage',
+        component: (): Promise<RouteComponent> => import('@/pages/resume/ResumePage.vue'),
+        props: castRouteParams,
+      },
+      {
         path: 'posts',
         name: 'posts',
         component: (): Promise<RouteComponent> => import('@pages/post/PostPage.vue'),
@@ -101,6 +107,7 @@ const routes = [
         name: 'updVacancyPage',
         component: (): Promise<RouteComponent> => import('@pages/vacancy/UpdateVacancyPage.vue'),
         props: castRouteParams,
+        meta: { authorize: ['COMPANY_ROLE'] },
       },
     ],
     meta: { authorize: [Role.User, Role.COMPANY, Role.Admin] } 

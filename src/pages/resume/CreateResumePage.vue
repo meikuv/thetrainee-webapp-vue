@@ -118,9 +118,9 @@
               <div class="work-exp_elements" v-for="(work, index) in workExps" :key="index">
                 <div class="work-exp_element">
                   <p style="color: #1785e5;">
-                    {{ work.startDate.toLocaleDateString('en-GB') }}
+                    {{ work.startDate.toDateString() }}
                     <span v-if="!work.endDate"> - until now</span>
-                    <span v-else> - {{ work.endDate.toLocaleDateString('en-GB') }} </span>
+                    <span v-else> - {{ work.endDate.toDateString() }} </span>
                   </p>
                   <b>{{ work.organization }}</b> 
                   {{ work.position }} 
@@ -401,7 +401,7 @@
         salaryMode: '',
         salary: '',
         aboutMe: { required },  
-        skill: '',
+        skill: { required },
         language: '',
       }
 
@@ -535,8 +535,8 @@
           return
         }
         let workExp = { 
-          startDate: stateWork.startDate,
-          endDate: stateWork.endDate,
+          startDate: Date.parse(stateWork.startDate).toString(),
+          endDate: Date.parse(stateWork.endDate).toString(),
           organization: stateWork.organization,
           position: stateWork.position,
           aboutWork: stateWork.aboutWork,
@@ -575,7 +575,7 @@
           phone: state.phone,
           city: state.city,
           gender: state.gender,
-          birthDate: state.birthDate,
+          birthDate: Date.parse(state.birthDate).toString(),
           position: state.position,
           salary: state.salary,
           salaryMode: state.salaryMode,

@@ -70,7 +70,7 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, computed, ref } from 'vue'
-  import { profileStore } from '@/store/profileModule'
+  import { profileModuleStore } from '@/store/profileModule'
   import { authModuleStore } from '@/store/authModule'
   import { useToast } from 'primevue/usetoast'
   import Spinner from '../../components/spinner/Spinner.vue';
@@ -94,7 +94,7 @@
 
     setup() {
       const toast = useToast()
-      const profileData = profileStore()
+      const profileData = profileModuleStore()
       const authUserStore = authModuleStore()
       const getProfileInfo = computed(() => profileData.getProfileInfo)
       const currentUser = computed(() => authUserStore.getCurrentUser)

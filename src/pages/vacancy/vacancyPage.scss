@@ -1,5 +1,4 @@
 .vacancy-wrapper {
-  // display: flex;
   width: 700px;
   height: 100%;
   margin-left: 30px;
@@ -17,7 +16,7 @@
   left: 50%;
 }
 
-.single-post {
+.single-vacancy {
   margin-bottom: 20px;
   position: relative;
   color: #0f1111;
@@ -51,7 +50,6 @@
 
 .single__header h1 {
   margin: 0;
-  margin-bottom: 0px;
   margin-bottom: 16px;
   font-size: 40px;
   font-weight: 600;
@@ -105,13 +103,12 @@
 
 .content-header {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .skills {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 0 0 0 12px;
+  margin: 0 0 8px 12px;
   line-height: 1em;
 }
 

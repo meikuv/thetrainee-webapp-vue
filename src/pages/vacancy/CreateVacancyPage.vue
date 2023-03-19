@@ -131,7 +131,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, reactive, computed, ref } from 'vue'
+  import { defineComponent, reactive, computed, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
   import { required } from '@vuelidate/validators'

@@ -9,6 +9,7 @@ export const resumeModuleStore = defineStore('resume', {
   state: () => {
     return {
       userResumes: [] as [] | IResumeItem[] as unknown | any,
+      resume: {} as any | IResumeItem as any,
       loaderIsActive: true as boolean,
       apiDeliveredStatus: '',
     }
@@ -49,6 +50,38 @@ export const resumeModuleStore = defineStore('resume', {
       } catch(error) {
         this.apiDeliveredStatus = 'error'
         this.changeLoaderActive(false)
+      }
+    },
+    async getResumeWithId(id: number) {
+      try {
+        this.changeLoaderActive(true)
+        const response = await axios.get<IResumeItem>(API_URL + `/resume/${id}`, { withCredentials: true })
+
+        const newObject = {
+          id: response.data.id,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          phone: response.data.phone,
+          city: response.data.city,
+          gender: response.data.gender,
+          birthDate: response.data.birthDate,
+          position: response.data.position,
+          salary: response.data.salary,
+          salaryMode: response.data.salaryMode,
+          aboutMe: response.data.aboutMe,
+          coreSkills: response.data.coreSkills,
+          workExps: response.data.workExperiences,
+          studyPlace: response.data.studyPlaces,
+          languages: response.data.languages,          
+        }
+        
+        this.resume = newObject
+        this.apiDeliveredStatus = 'success'
+        setTimeout(() => {
+          this.changeLoaderActive(false)
+        }, 1500)
+      } catch (error) {
+        this.apiDeliveredStatus = 'error'
       }
     },
     createResume(resume: {

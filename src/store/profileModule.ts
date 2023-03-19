@@ -1,8 +1,8 @@
 import { defineStore } from "pinia"
-import ProfileService from '@/services/profileUpdateService'
+import ProfileService from '@/services/profileService'
 import axios from "axios"
 
-export const profileStore = defineStore('profileModule', {
+export const profileModuleStore = defineStore('profileModule', {
   state: () => {
     return {
       loaderIsActive: true as boolean,

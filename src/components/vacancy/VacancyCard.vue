@@ -121,7 +121,7 @@
 
       const openModal = () => {
         displayModal.value = true;
-      };
+      }
 
       const confirm1 = (event: any, id: number) => {
         confirm.require({
@@ -134,8 +134,8 @@
           reject: () => {
             showMessage('error', 'Rejected', 'You have rejected', 2000)
           }
-        });
-      };
+        })
+      }
 
       function deleteVacancy(id: number) {
         vacancyStore.deleteVacancy(id).then(

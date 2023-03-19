@@ -41,7 +41,7 @@
   }
 }
 
-.single-post .single__header {
+.single-vacancy .single__header {
   padding-top: 28px;
   padding-right: 34px;
   padding-bottom: 28px;
@@ -51,7 +51,7 @@
 .single__header h1 {
   margin: 0;
   margin-bottom: 16px;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 600;
   line-height: 35px;
   letter-spacing: -0.015em;
@@ -85,9 +85,12 @@
   margin-top: 24px;
 }
 
-.p-button {
-  width: 110px;
+.btn {
   background-color: #1d706d;
+}
+
+.p-button-label {
+  width: 110px;
   border: 2px;  
   color: #ffffff; 
   font-size: 16px;
@@ -175,7 +178,6 @@ ul li::marker {
   flex-direction: column;
   margin-bottom: auto;
   width: 330px;
-  // margin-left: 30px;
 }
 
 .box {
@@ -260,4 +262,19 @@ img {
   font-family: 18px;
   font-weight: 500;
   color: #1a6865;
+}
+
+.resume-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.resume-position-text {
+  margin-bottom: 5px;
+}
+
+.view-resume-text {
+  color: #2196f3;
+  font-size: 12px;
 }

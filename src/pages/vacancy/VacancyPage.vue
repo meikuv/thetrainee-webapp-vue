@@ -1,4 +1,5 @@
 <template>
+  <Toast />
   <div v-if="vacancyStoreData.$state.loaderIsActive" class="spinner-centred">
       <spinner />
   </div>
@@ -13,24 +14,24 @@
             </span>
           </div>
           <div class="post-actions">
-            <Button label="Respond" class="p-btn-label" />
+            <Button label="Respond" class="p-btn-label btn" @click="openModal()" />
           </div>
         </div>
         <div class="single__content">
-          <h2>Basic skills</h2>
+          <h3>Basic skills</h3>
           <div class="content-header">
             <div class="skills" v-for="(item, index) in vacancyStoreData.$state.vacancy.skills" :key="index">
               <div class="round-divider"></div>
               <span>{{ item.skill }}</span>
             </div>
           </div>
-          <h2>Requirements, required skills</h2>
+          <h3>Requirements, required skills</h3>
           <ul>
             <li v-for="(item, index) in vacancyStoreData.$state.vacancy.requirements" :key="index">
               {{ item.reqName }};
             </li>
           </ul>
-          <h2>Work conditions</h2>
+          <h3>Work conditions</h3>
           <ul>
             <li v-for="(item, index) in vacancyStoreData.$state.vacancy.conditions" :key="index">
               {{ item.conName }};
@@ -72,18 +73,41 @@
       </div>
     </div>
   </aside>
+  <Dialog header="Select resume" v-model:visible="displayModal" :style="{ width: '30vw'}" :modal="true">
+    <div class="resume-card" v-for="(res, index) in resumeStore.userResumes" :key="index">
+      <div class="resume-info-text">
+        <h5 class="resume-position-text">{{ res.position }}</h5>
+        <router-link :to="{ name: 'myResumes'}">
+          <a class="view-resume-text">View resume</a>
+        </router-link>
+      </div>
+      <Button 
+        icon="pi pi-check" :loading="loading === res.id"
+        text rounded aria-label="Filter" style="font-size: 5px;" 
+        @click="respondVacancy(res.id)"
+        :key="index"
+      />
+    </div>
+  </Dialog>
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted } from 'vue'
-  import { vacancyModuleStore } from '@/store/vacancyModule';
+  import { defineComponent, onMounted, computed, ref } from 'vue'
+  import { vacancyModuleStore } from '@/store/vacancyModule'
+  import { resumeModuleStore } from '@/store/resumeModule'
+  import { authModuleStore } from '@/store/authModule'
+  import { useToast } from 'primevue/usetoast'
   import Spinner from '@components/spinner/Spinner.vue'
-  import Button from 'primevue/button';
+  import Dialog from 'primevue/dialog'
+  import Button from 'primevue/button'
+  import Toast from 'primevue/toast'
 
   export default defineComponent({  
     components: {
       Spinner,
+      Dialog,
       Button,
+      Toast,
     },
     props: {
       id: {
@@ -92,13 +116,69 @@
       },
     },
     setup(props: any) {
+      const toast = useToast()
+      const loading = ref(0)
+      const errorMessage = ref('')
+      const displayModal = ref(false)
+      const authUserStore = authModuleStore()
+      const resumeStore = resumeModuleStore()
       const vacancyStoreData = vacancyModuleStore()
+      const currentUser = computed(() => authUserStore.currentUser)
+      const vacancy = computed(() => vacancyStoreData.getVacancy)
+
+      const showMessage = (
+        severity: string,
+        summary: string,
+        detail: string,
+        life: number,
+        ) => {
+          toast.add({ severity: severity, summary: summary, detail: detail, life: life })
+      }
+
+      const openModal = () => {
+        displayModal.value = true;
+      }
+
+      function respondVacancy(resumeId: number) {
+        loading.value = resumeId
+        const respond = {
+          vacancyId: vacancy.value.id,
+          companyName: vacancy.value.companyName,
+          username: currentUser.value,
+          resumeId: resumeId,
+          jobName: vacancy.value.jobName,
+        }
+        vacancyStoreData.respondVacancy(respond).then(
+          () => {
+            setTimeout(() => {
+                loading.value = 0
+                showMessage('success', 'Success', 'Responded', 2000)
+            }, 500);
+          },
+          error => {
+            errorMessage.value =
+              (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            setTimeout(() => {
+              loading.value = 0
+              showMessage('error', 'Error', errorMessage.value, 2000)
+            }, 500)
+          }
+        )
+      }
 
       onMounted(async () => {
         await vacancyStoreData.getDataWithID(props.id)
+        await resumeStore.getUserResumes(currentUser.value)
       })
 
-      return { vacancyStoreData }
+      return { 
+        vacancyStoreData,
+        respondVacancy,
+        displayModal,
+        resumeStore,
+        openModal,
+        loading,
+      }
     }
   })
 </script>

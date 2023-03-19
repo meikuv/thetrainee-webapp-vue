@@ -96,7 +96,8 @@
       const toast = useToast()
       const profileData = profileModuleStore()
       const authUserStore = authModuleStore()
-      const getProfileInfo = computed(() => profileData.getProfileInfo)
+      const getProfileInfo: any = computed(() => profileData.getProfileInfo)
+      const profileInfo: any = computed(() => profileData.getStorageInfo)
       const currentUser = computed(() => authUserStore.getCurrentUser)
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))
 
@@ -114,7 +115,16 @@
 
       const handleSubmit = () => {
         submitted.value = true
-        userInfoUpdate()
+        function hasChanged() {
+          return Object.keys(getProfileInfo.value)
+            .some(field => (getProfileInfo.value[field] || null) !== profileInfo.value[field])
+        }
+        console.log(profileInfo.value['userGithub'], getProfileInfo.value['userGithub'])
+        if (hasChanged()) {
+          userInfoUpdate()
+        } else {
+          showMessage('info', 'Info', 'Nothing changed !', 2000)
+        }
       }
 
       function userInfoUpdate() {
@@ -132,12 +142,15 @@
         } as any
         profileData.userProfileUpdate(userInfo).then(
           () => {
-            showMessage('success', 'Success Message', 'Updated successfully !', 3000)
+            showMessage('success', 'Success Message', 'Updated successfully !', 1000)
+            setTimeout(() => {
+              location.reload()
+            }, 900)
           },
           error => {
             errorMessage.value =
               (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-            showMessage('error', 'Error Message', errorMessage.value, 3000)
+            showMessage('error', 'Error Message', errorMessage.value, 2000)
           },
         )
       }

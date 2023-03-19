@@ -57,7 +57,7 @@
                 id="birth-date"
                 class="inputs_first"
                 v-model="v$.birthDate.$model"
-                :class="{'p-invalid': v$.gender.$invalid && submitted}"
+                :class="{'p-invalid': v$.birthDate.$invalid && submitted}"
                 showButtonBar
                 dateFormat="dd/mm/yy"
                 showIcon
@@ -89,8 +89,11 @@
             <div class="block-column">
               <label for="salary" class="block-label" :class="{'p-error': v$.salary.$invalid && submitted}">Salary</label>
               <InputText 
-                id="salary" 
+                id="salary"
                 class="input_third"
+                type="number"
+                oninput="this.value = Math.round(this.value);"
+                step="10000"
                 v-model="v$.salary.$model"
                 :class="{'p-invalid': v$.salary.$invalid && submitted}"
               />
@@ -106,25 +109,25 @@
             </div>
             <h3>Work experience</h3>
             <div class="block-column">
-              <label for="work-exp" class="block-label">Places of work</label>
+              <label for="work-exp" class="block-label" :class="{'p-error': v$.workExps.$invalid && submitted}">Places of work</label>
               <Button
                 id="work-exp"
                 class="btn_list" 
                 label="Add a place of work"
+                :class="{'p-invalid': v$.workExps.$invalid && submitted}"
                 @click="openModal()"
               />
             </div>
             <div class="work-exp_wrapper">
-              <div class="work-exp_elements" v-for="(work, index) in workExps" :key="index">
+              <div class="work-exp_elements" v-for="(work, index) in v$.workExps.$model" :key="index">
                 <div class="work-exp_element">
                   <p style="color: #1785e5;">
-                    {{ work.startDate.toDateString() }}
+                    {{ work.startDate }}
                     <span v-if="!work.endDate"> - until now</span>
-                    <span v-else> - {{ work.endDate.toDateString() }} </span>
+                    <span v-else> - {{ work.endDate }} </span>
                   </p>
                   <b>{{ work.organization }}</b> 
                   {{ work.position }} 
-                  {{ work.aboutWork }} 
                 </div>
                 <i class="pi pi-trash" style="font-size: 12px; margin: 5px 5px;" @click="deleteElement('workExp', index)"></i>
               </div>
@@ -141,35 +144,37 @@
               />
             </div>
             <div class="block-column">
-              <label for="skill-name" class="block-label">Core Skills</label>
+              <label for="skill-name" class="block-label" :class="{'p-error': v$.keySkills.$invalid && submitted}">Core Skills</label>
               <form class="form_list" @submit.prevent="addNew('skills')">
                 <InputText 
                   id="skill-name" 
                   class="inputs_second input_list"
+                  :class="{'p-invalid': v$.keySkills.$invalid && submitted}"
                   placeholder="Start typing here"
-                  v-model="v$.skill.$model"
+                  v-model="skill"
                 />
                 <Button class="btn_form" label="Add skill" type="submit"/>
               </form>
             </div>
             <div class="skill_wrapper">
-              <span class="skill-badge" v-for="(skill, index) in keySkills" :key="index">
+              <span class="skill-badge" v-for="(skill, index) in v$.keySkills.$model" :key="index">
                 {{ skill.skill }} 
                 <i class="pi pi-trash" style="font-size: 10px; margin-left: 2px;" @click="deleteElement('skills', index)"></i>
               </span>
             </div>
             <h3>Education</h3>
             <div class="block-column">
-              <label for="stydy-place" class="block-label">Place of study</label>
+              <label for="stydy-place" class="block-label" :class="{'p-error': v$.studyPlaces.$invalid && submitted}">Place of study</label>
               <Button
                 id="work-exp"
                 class="btn_list" 
                 label="Add a place of study"
+                :class="{'p-invalid': v$.studyPlaces.$invalid && submitted}"
                 @click="openStudyModal()"
               />
             </div>
             <div class="study_wrapper">
-              <div class="study_elements" v-for="(study, index) in studyPlaces" :key="index">
+              <div class="study_elements" v-for="(study, index) in v$.studyPlaces.$model" :key="index">
                 <div class="study_element">
                   <div class="institute">
                     <label for="institute-label">Institute: </label>
@@ -192,19 +197,20 @@
               </div>
             </div>
             <div class="block-column">
-              <label for="language" class="block-label">Languages</label>
+              <label for="language" class="block-label" :class="{'p-error': v$.languages.$invalid && submitted}">Languages</label>
               <form class="form_list" @submit.prevent="addNew('language')">
                 <InputText 
                   id="language" 
                   class="inputs_second input_list"
+                  :class="{'p-invalid': v$.languages.$invalid && submitted}"
                   placeholder="For example: English - Elementary"
-                  v-model="v$.language.$model"
+                  v-model="language"
                 />
                 <Button class="btn_form" label="Add language" type="submit"/>
               </form>
             </div>
             <div class="skill_wrapper">
-              <span class="skill-badge" v-for="(language, index) in languages" :key="index">
+              <span class="skill-badge" v-for="(language, index) in v$.languages.$model" :key="index">
                 {{ language.language }} 
                 <i class="pi pi-trash" style="font-size: 10px; margin-left: 2px;" @click="deleteElement('language', index)"></i>
               </span>
@@ -226,7 +232,7 @@
             v-model="s$.startDate.$model"
             :class="{'p-invalid': s$.startDate.$invalid && submitWorkModal}"
             showButtonBar
-            view="month" dateFormat="dd/mm/yy"
+            view="month" dateFormat="mm/yy"
             showIcon
           />
         </div>
@@ -237,7 +243,7 @@
             class="inputs_fifth"
             v-model="s$.endDate.$model"
             showButtonBar
-            view="month" dateFormat="dd/mm/yy"
+            view="month" dateFormat="mm/yy"
             showIcon
           />
         </div>
@@ -307,7 +313,9 @@
           <label for="gradYear" :class="{'p-error': k$.gradYear.$invalid && submitStudyModal }">Year of graduation</label>
           <InputText 
             id="gradYear" 
-            class="inputs_fourth"
+            type="number"
+            oninput="this.value = Math.round(this.value);"
+            style="width: 10em;"
             v-model="k$.gradYear.$model"
             :class="{'p-invalid': k$.gradYear.$invalid && submitStudyModal}"
           />
@@ -358,10 +366,8 @@
       const authUserStore = authModuleStore()
       const resumeStore = resumeModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
-      const keySkills: any = ref([])
-      const languages: any = ref([])
-      const workExps: any = ref([])
-      const studyPlaces: any = ref([])
+      const skill = ref('')
+      const language = ref('')
       const displayModal = ref(false)
       const displayStudyModal = ref(false)
       const errorMessage = ref('')
@@ -383,11 +389,13 @@
         gender: '',
         birthDate: '',
         position: 'Novice specialist',
-        salary: '',
+        salary: null,
         salaryMode: 'KZT',
         aboutMe: '',
-        skill: '',
-        language: ''
+        keySkills: [] as any,
+        languages: [] as any,
+        workExps: [] as any,
+        studyPlaces: [] as any,
       })
 
       const rules = {
@@ -401,8 +409,10 @@
         salaryMode: '',
         salary: '',
         aboutMe: { required },  
-        skill: { required },
-        language: '',
+        keySkills: { required },
+        languages: { required },
+        workExps: { required },
+        studyPlaces: { required },
       }
 
       const stateWork = reactive({
@@ -444,11 +454,11 @@
           state.position = ''
           state.phone = ''
           state.aboutMe = ''
-          state.salary = ''
-          keySkills.value = []
-          languages.value = []
-          studyPlaces.value = []
-          workExps.value = []
+          state.salary = null
+          state.keySkills = []
+          state.languages = []
+          state.studyPlaces = []
+          state.workExps = []
           submitted.value = false
       }
 
@@ -484,29 +494,29 @@
 
       const addNew = (name: any) => {
         if (name === 'skills') {
-          if (state.skill) {
-            let skill = { skill: state.skill }
-            keySkills.value.push(skill)
+          if (skill.value !== '') {
+            let bskill = { skill: skill.value }
+            state.keySkills.push(bskill)
           }
-          state.skill = ''
+          skill.value = ''
         } else if (name === 'language') {
-          if (state.language) {
-            let language = { language: state.language }
-            languages.value.push(language)
+          if (language.value !== '') {
+            let lang = { language: language.value }
+            state.languages.push(lang)
           }
-          state.language = ''
+          language.value = ''
         }
       }
 
       const deleteElement = (name:any, index:number) => {
         if (name === 'skills') {
-          keySkills.value.splice(index, 1)
+          state.keySkills.splice(index, 1)
         } else if (name === 'language') {
-          languages.value.splice(index, 1)
+          state.languages.splice(index, 1)
         } else if (name === 'workExp') {
-          workExps.value.splice(index, 1)
+          state.workExps.splice(index, 1)
         } else if (name === 'studyPlace') {
-          studyPlaces.value.splice(index, 1)
+          state.studyPlaces.splice(index, 1)
         }
       }
 
@@ -535,14 +545,14 @@
           return
         }
         let workExp = { 
-          startDate: Date.parse(stateWork.startDate).toString(),
-          endDate: Date.parse(stateWork.endDate).toString(),
+          startDate: `${stateWork.startDate.toLocaleString('en-US', { month: 'short' })}/${stateWork.startDate.getFullYear()}`,
+          endDate: stateWork.endDate ? `${stateWork.endDate.toLocaleString('en-US', { month: 'short' })}/${stateWork.endDate.getFullYear()}` : '',
           organization: stateWork.organization,
           position: stateWork.position,
           aboutWork: stateWork.aboutWork,
         }
 
-        workExps.value.push(workExp)
+        state.workExps.push(workExp)
 
         displayModal.value = false;
         resetWorkForm()
@@ -561,7 +571,7 @@
           gradYear: stateStudy.gradYear
         }
 
-        studyPlaces.value.push(studyPlace)
+        state.studyPlaces.push(studyPlace)
 
         displayStudyModal.value = false;
         resetStudyForm()
@@ -575,15 +585,15 @@
           phone: state.phone,
           city: state.city,
           gender: state.gender,
-          birthDate: Date.parse(state.birthDate).toString(),
+          birthDate: state.birthDate.toLocaleDateString('pt-PT'),
           position: state.position,
-          salary: state.salary,
+          salary: state.salary === 0 ? null : state.salary,
           salaryMode: state.salaryMode,
           aboutMe: state.aboutMe,
-          coreSkills: keySkills.value,
-          workExperiences: workExps.value,
-          studyPlaces: studyPlaces.value,
-          languages: languages.value,
+          coreSkills: state.keySkills,
+          workExperiences: state.workExps,
+          studyPlaces: state.studyPlaces,
+          languages: state.languages,
         } as any
         resumeStore.createResume(resume).then(
           () => {
@@ -617,14 +627,12 @@
         displayModal,
         handleSubmit,
         selectGender,
-        studyPlaces,
         salaryModes,
         openModal,
         submitted,
-        keySkills,
-        languages,
-        workExps,
+        language,
         addNew,
+        skill,
         v$,
         s$,
         k$,

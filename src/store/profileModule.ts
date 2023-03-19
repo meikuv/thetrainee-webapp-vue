@@ -8,11 +8,18 @@ export const profileModuleStore = defineStore('profileModule', {
       loaderIsActive: true as boolean,
       apiDeliveredStatus: '',
       profileInfo: {} as any,
+      storageInfo: {} as any,
     }
   },
   getters: {
     getProfileInfo(state) {
       return state.profileInfo
+    },
+    getStorageInfo(state) {
+      if (sessionStorage.getItem('profileInfo') !== '') {
+        this.storageInfo = JSON.parse(<string>sessionStorage.getItem('profileInfo'))
+      }
+      return state.storageInfo
     }
   },
   actions: {
@@ -61,6 +68,7 @@ export const profileModuleStore = defineStore('profileModule', {
         }
 
         this.profileInfo = newObject
+        sessionStorage.setItem('profileInfo', JSON.stringify(newObject))
         this.apiDeliveredStatus = 'success'
         setTimeout(() => {
           this.changeLoaderActive(false)

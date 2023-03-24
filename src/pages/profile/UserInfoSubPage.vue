@@ -6,7 +6,7 @@
   <Card style="width: 55em; margin-left: 40px; padding: 0px 24px 0 24px;" v-if="!profileData.$state.loaderIsActive">
     <template #header>
       <div class="about-details__header">
-        <h5 class="about-details__header-text">Personal Information</h5>
+        <h5 class="about-details__header-text">Account Details</h5>
       </div>
     </template>
     <template #title>
@@ -116,10 +116,11 @@
       const handleSubmit = () => {
         submitted.value = true
         function hasChanged() {
+          console.log(getProfileInfo.value, profileInfo.value)
           return Object.keys(getProfileInfo.value)
             .some(field => (getProfileInfo.value[field] || null) !== profileInfo.value[field])
         }
-        console.log(profileInfo.value['userGithub'], getProfileInfo.value['userGithub'])
+        console.log(profileInfo.value['userLinkedIn'], getProfileInfo.value['userLinkedIn'])
         if (hasChanged()) {
           userInfoUpdate()
         } else {
@@ -207,6 +208,8 @@
   }
 
   .about-details__content {
+    display: flex;
+    flex-direction: column;
     margin-left: 0 auto;
   }
 

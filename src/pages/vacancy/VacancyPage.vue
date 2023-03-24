@@ -124,7 +124,6 @@
       const resumeStore = resumeModuleStore()
       const vacancyStoreData = vacancyModuleStore()
       const currentUser = computed(() => authUserStore.currentUser)
-      const vacancy = computed(() => vacancyStoreData.getVacancy)
 
       const showMessage = (
         severity: string,
@@ -142,11 +141,11 @@
       function respondVacancy(resumeId: number) {
         loading.value = resumeId
         const respond = {
-          vacancyId: vacancy.value.id,
-          companyName: vacancy.value.companyName,
+          vacancyId: vacancyStoreData.vacancy.id,
+          companyName: vacancyStoreData.vacancy.companyName,
           username: currentUser.value,
           resumeId: resumeId,
-          jobName: vacancy.value.jobName,
+          jobName: vacancyStoreData.vacancy.jobName,
         }
         vacancyStoreData.respondVacancy(respond).then(
           () => {

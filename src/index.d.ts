@@ -6,5 +6,10 @@ declare module 'vue' {
     frameBorder?: string
   }
 }
+declare global {
+  interface Window {
+    example: any; // 👈️ turn off type checking
+  }
+}
 
 export default vue

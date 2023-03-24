@@ -4,7 +4,7 @@
   </div>
   <div class="resume-wrapper">
     <div v-if="!resumeStore.loaderIsActive && resumeStore.resume" class="resume-content">
-      <article class="single-resume" :ref="document">
+      <article class="single-resume" id="resume-document">
         <div class="single__header">
           <div class="single__header-left-content">
             <h3 itemprop="headline">{{ resumeStore.resume.lastName }} {{ resumeStore.resume.firstName }}</h3>
@@ -89,7 +89,7 @@
         </div>
       </article>
       <div class="resume-actions">
-        <i class="pi pi-download action-btn" @click=""></i>
+        <i class="pi pi-download action-btn" @click="exportToPDF()"></i>
         <Divider layout="vertical"/>
         <i class="pi pi-pencil action-btn"></i>
       </div>
@@ -121,7 +121,6 @@
       },
     },
     setup(props: any) {
-      const document = ref()
       const resumeStore = resumeModuleStore()
       const authUserStore = authModuleStore()
       const profileStore = profileModuleStore()
@@ -129,7 +128,18 @@
       const currentUser = computed(() => authUserStore.getCurrentUser)
 
       function exportToPDF () {
-				
+        const { jsPDF } = window.jspdf 
+
+        var doc = new jsPDF('l', 'mm', 'a4');
+        var pdfjs = document.getElementById('resume-document');
+
+        doc.html(pdfjs, {
+          callback: function(doc: any) {
+            doc.save("newpdf.pdf");
+          },
+          // x: 12,
+          // y: 12
+        });   
 			}
 
       onMounted(async () => {

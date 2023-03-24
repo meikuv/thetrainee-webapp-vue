@@ -16,11 +16,6 @@ export const vacancyModuleStore = defineStore('vacancy', {
       vacancy: {} as any | IResponseItem as any,
     }
   },
-  getters: {
-    getVacancy(state) {
-      return state.vacancy
-    }
-  },
   actions: {
     changeLoaderActive(mode: boolean) {
       this.loaderIsActive = mode
@@ -79,7 +74,8 @@ export const vacancyModuleStore = defineStore('vacancy', {
           conditions: response.data.conditions,
         }
         
-        this.vacancy  = newObject
+        this.vacancy = newObject
+        sessionStorage.setItem('vacancy', JSON.stringify(newObject))
         this.apiDeliveredStatus = 'success'
         setTimeout(() => {
           this.changeLoaderActive(false)

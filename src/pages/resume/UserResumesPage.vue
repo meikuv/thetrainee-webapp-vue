@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, onMounted } from 'vue'
+  import { defineComponent, computed } from 'vue'
   import { resumeModuleStore } from '@/store/resumeModule'
   import { authModuleStore } from '@/store/authModule'
   import ResumeList from '@/components/resume/ResumeList.vue'
@@ -24,9 +24,7 @@
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
 
-      onMounted(async function() {
-        await resumeStore.getUserResumes(currentUser.value)
-      })
+      resumeStore.getUserResumes(currentUser.value)
 
       return {
         resumeStore,

@@ -107,7 +107,7 @@
       onMounted(() => {
         if (currentUser.value !== null) {
           router.push({
-            name: 'home'
+            name: '/'
           })
         } else {
           return

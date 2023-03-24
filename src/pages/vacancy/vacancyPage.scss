@@ -44,7 +44,7 @@
 .single-vacancy .single__header {
   padding-top: 28px;
   padding-right: 34px;
-  padding-bottom: 28px;
+  padding-bottom: 10px;
   padding-left: 34px;
 }
 
@@ -82,11 +82,11 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 24px;
 }
 
 .btn {
   background-color: #1d706d;
+  border: none;
 }
 
 .p-button-label {

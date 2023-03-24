@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, computed, ref } from 'vue'
+  import { defineComponent, computed, ref } from 'vue'
   import { vacancyModuleStore } from '@/store/vacancyModule'
   import { authModuleStore } from '@/store/authModule'
   import VacancyList from '@/components/vacancy/VacancyList.vue'
@@ -24,7 +24,7 @@
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
 
-      onMounted( async () => await vacancyStore.getCompanyVacancy(currentUser.value))
+      vacancyStore.getCompanyVacancy(currentUser.value)
 
       return {
         vacancyStore,

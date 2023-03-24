@@ -15,6 +15,7 @@ class ProfileService {
     userTelegram: string,
     userLinkedIn: string,
     phone: string,
+    about: string,
   }) {
     return axios.post(API_URL + '/userInfo/update', {
       username: userInfo.username,
@@ -27,6 +28,7 @@ class ProfileService {
       userTelegram: userInfo.userTelegram,
       userLinkedIn: userInfo.userLinkedIn,
       phone: userInfo.phone,
+      about: userInfo.about,
     }, { withCredentials: true })
     .then(response => {
       return response.data

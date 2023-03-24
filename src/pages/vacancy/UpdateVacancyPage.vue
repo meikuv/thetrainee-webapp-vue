@@ -3,7 +3,7 @@
   <div v-if="vacancyStore.loaderIsActive" class="spinner-centred">
     <spinner />
   </div>
-  <div v-if="vacancyStore.data && !vacancyStore.loaderIsActive">
+  <div v-if="vacancyStore.vacancy && !vacancyStore.loaderIsActive">
     <Card style="width: 55em; margin-left: 50px; padding: 0px 24px 0 24px;">
       <template #header>
         <div class="vacancy__header">
@@ -18,20 +18,35 @@
           <form @submit.prevent="handleSubmit()">
             <div class="p-fluid">
               <div class="field">
-                <label for="company-name" :class="{'p-error': vacancyStore.vacancy.companyName.length === 0 && submitted}">Company Name</label>
-                <InputText id="company-name" class="inputs_first" v-model="vacancyStore.vacancy.companyName" required  v-tooltip.bottom="'Company'" :class="{'p-invalid': vacancyStore.vacancy.companyName.length === 0 && submitted}"/>
+                <label for="company-name" 
+                  :class="{'p-error': !vacancyStore.vacancy.companyName && submitted}"
+                >
+                  Company Name
+                </label>
+                <InputText id="company-name" class="inputs_first" 
+                  v-model="vacancyStore.vacancy.companyName"  
+                  v-tooltip.bottom="'Company'" 
+                  :class="{'p-invalid': !vacancyStore.vacancy.companyName && submitted}"
+                />
               </div>
               <div class="field">
-                <label for="job-name" :class="{'p-error': vacancyStore.vacancy.jobName.length === 0 && submitted}">Job Name</label>
-                <InputText id="job-name" class="inputs_first" v-model="vacancyStore.vacancy.jobName" required v-tooltip.bottom="'Job'" :class="{'p-invalid': vacancyStore.vacancy.jobName.length === 0 && submitted}"/>
+                <label for="job-name" 
+                  :class="{'p-error': !vacancyStore.vacancy.jobName && submitted}"
+                >
+                  Job Name
+                </label>
+                <InputText id="job-name" class="inputs_first" 
+                  v-model="vacancyStore.vacancy.jobName" v-tooltip.bottom="'Job'" 
+                  :class="{'p-invalid': !vacancyStore.vacancy.jobName && submitted}"
+                />
               </div>
               <div class="field">
-                <label for="city-name" :class="{'p-error': vacancyStore.vacancy.city.length === 0 && submitted}">City</label>
+                <label for="city-name" :class="{'p-error': !vacancyStore.vacancy.city && submitted}">City</label>
                 <Dropdown 
                   id="city-name" 
                   class="inputs_first"
                   v-model="vacancyStore.vacancy.city"
-                  :class="{'p-invalid': vacancyStore.vacancy.city.length === 0 && submitted}"
+                  :class="{'p-invalid': !vacancyStore.vacancy.city && submitted}"
                   :options="cities" 
                   optionLabel="name" 
                   optionValue="code" 
@@ -39,14 +54,14 @@
                 />
               </div>
               <div class="field">
-                <label for="skill-name" :class="{'p-error': vacancyStore.vacancy.skills.length === 0 && submitted}">Core Skills</label>
+                <label for="skill-name" :class="{'p-error': !vacancyStore.vacancy.skills && submitted}">Core Skills</label>
                 <form class="form_list" @submit.prevent="addNew('skills')">
                   <InputText 
                     id="skill-name" 
                     class="inputs_first input_list"
                     v-tooltip.bottom="'Core skills'"
                     v-model="bSkill"
-                    :class="{'p-invalid': vacancyStore.vacancy.skills.length === 0 && submitted}"
+                    :class="{'p-invalid': !vacancyStore.vacancy.skills && submitted}"
                     placeholder="For example: Java, SQL"
                   />
                   <Button class="btn_list" label="Add skill" type="submit"/>
@@ -61,14 +76,14 @@
                 </ul>
               </div>
               <div class="field">
-                <label for="require" :class="{'p-error': vacancyStore.vacancy.requirements.length === 0 && submitted}">Requirements</label>
+                <label for="require" :class="{'p-error': !vacancyStore.vacancy.requirements && submitted}">Requirements</label>
                 <form class="form_list" @submit.prevent="addNew('require')">
                   <InputText 
                     id="require" 
                     class="inputs_second input_list"
                     v-tooltip.bottom="'Requirements'"
                     v-model="reqName"
-                    :class="{'p-invalid': vacancyStore.vacancy.requirements.length === 0 && submitted}"
+                    :class="{'p-invalid': !vacancyStore.vacancy.requirements && submitted}"
                     placeholder="For example: Knowledge of the basics of DBMS"
                   />
                   <Button class="btn_list" label="Add requirement" type="submit"/>
@@ -83,14 +98,14 @@
                 </ul>
               </div>
               <div class="field">
-                <label for="response" :class="{'p-error': vacancyStore.vacancy.dependencies.length === 0 && submitted}">Dependencies</label>
+                <label for="response" :class="{'p-error': !vacancyStore.vacancy.dependencies && submitted}">Dependencies</label>
                 <form class="form_list" @submit.prevent="addNew('dependency')">
                   <InputText 
                     id="response" 
                     class="inputs_second input_list"
                     v-tooltip.bottom="'dependencies'"
                     v-model="depName"
-                    :class="{'p-invalid': vacancyStore.vacancy.dependencies.length === 0 && submitted}"
+                    :class="{'p-invalid': !vacancyStore.vacancy.dependencies && submitted}"
                     placeholder="For example: Full Time or Remote Work"
                   />
                   <Button class="btn_list" label="Add dependency" type="submit"/>
@@ -105,14 +120,14 @@
                 </ul>
               </div>
               <div class="field">
-                <label for="condition" :class="{'p-error': vacancyStore.vacancy.conditions.length === 0 && submitted}">Work Conditions</label>
+                <label for="condition" :class="{'p-error': !vacancyStore.vacancy.conditions && submitted}">Work Conditions</label>
                 <form class="form_list" @submit.prevent="addNew('condition')">
                   <InputText 
                     id="condition" 
                     class="inputs_second input_list"
                     v-tooltip.bottom="'Work Conditions'"
                     v-model="conName"
-                    :class="{'p-invalid': vacancyStore.vacancy.conditions.length === 0 && submitted}"
+                    :class="{'p-invalid': !vacancyStore.vacancy.conditions && submitted}"
                     placeholder="For example: Official employment"
                   />
                   <Button class="btn_list" label="Add condition" type="submit"/>
@@ -139,7 +154,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, computed, ref } from 'vue'
+  import { defineComponent, computed, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
   import { useRouter } from 'vue-router'
@@ -178,6 +193,8 @@
       const vacancyStore = vacancyModuleStore()
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
+
+      vacancyStore.getDataWithID(props.id)
 
       const errorMessage = ref('')
       const submitted = ref(false)
@@ -245,9 +262,10 @@
           showMessage('info', 'Info Message', 'Nothing changed !', 2000)
           return
         } else {
-          if (vacancyStore.vacancy.city.length === 0 || vacancyStore.vacancy.skills.length === 0
-              || vacancyStore.vacancy.requirements.length === 0 || vacancyStore.vacancy.dependencies.length === 0
-                || vacancyStore.vacancy.conditions.length === 0) {
+          if (vacancyStore.vacancy.companyName.length === 0 || vacancyStore.vacancy.city.length === 0 
+              || vacancyStore.vacancy.skills.length === 0 || vacancyStore.vacancy.jobName.length === 0
+                || vacancyStore.vacancy.requirements.length === 0 || vacancyStore.vacancy.dependencies.length === 0
+                  || vacancyStore.vacancy.conditions.length === 0) {
                   
                   showMessage('error', 'Error Message', 'Fill in all the fields !', 2000)
                   return
@@ -283,10 +301,6 @@
           },
         )
       }
-      
-      onMounted(async () => {
-        await vacancyStore.getDataWithID(props.id)
-      })
 
       return {
         deleteElement,

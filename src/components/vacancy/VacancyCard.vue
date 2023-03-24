@@ -9,7 +9,7 @@
           <img src="http://localhost:5173/src/assets/icons8-company-100.png" width="64" height="64"/>
         </div>
         <router-link
-          :to="{ name: 'vacancyPage', params: { id: vacancy.id } }"
+          v-if="vacancy.id"  :to="{ name: 'vacancyPage', params: { id: vacancy.id } }"
         >
           <div class="tp-vacancy-card-top__right">
             <a href="https://www.google.com/" class="tp-vacancy-card-company-link">{{ vacancy.companyName }}</a>
@@ -72,7 +72,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, onMounted, ref } from 'vue'
+  import { defineComponent, computed, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
   import { resumeModuleStore } from '@/store/resumeModule'
@@ -110,6 +110,8 @@
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))
       const currentUser = computed(() => authUserStore.currentUser)
 
+      resumeStore.getUserResumes(currentUser.value)
+
       const showMessage = (
         severity: string,
         summary: string,
@@ -132,7 +134,6 @@
             deleteVacancy(id)
           },
           reject: () => {
-            showMessage('error', 'Rejected', 'You have rejected', 2000)
           }
         })
       }
@@ -174,10 +175,6 @@
           }
         )
       }
-
-      onMounted(async () => {
-        await resumeStore.getUserResumes(currentUser.value)
-      })
 
       return {
         respondVacancy,

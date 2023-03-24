@@ -37,6 +37,7 @@ export const profileModuleStore = defineStore('profileModule', {
       userTelegram: string,
       userLinkedIn: string,
       phone: string,
+      about: string,
     }) {
       return ProfileService.userInfoUpdate(userInfo)
         .then(userInfo => {
@@ -65,6 +66,7 @@ export const profileModuleStore = defineStore('profileModule', {
           userTelegram: response.data.userTelegram,
           userLinkedIn: response.data.userLinkedIn,
           phone: response.data.phone,
+          about: response.data.about,
         }
 
         this.profileInfo = newObject

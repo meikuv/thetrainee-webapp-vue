@@ -3,7 +3,7 @@
   <div v-if="profileData.$state.loaderIsActive" class="spinner-centred">
     <spinner />
   </div>
-  <Card style="width: 55em; margin-left: 40px; padding: 0px 24px 0 24px;" v-if="!profileData.$state.loaderIsActive">
+  <Card style="width: 55em; margin-left: 40px; padding: 5px 10px 0px 10px;" v-if="!profileData.$state.loaderIsActive">
     <template #header>
       <div class="about-details__header">
         <h5 class="about-details__header-text">Account Details</h5>
@@ -14,7 +14,7 @@
     </template>
     <template #content>
       <div class="about-details__content">
-        <form @submit.prevent="handleSubmit()" class="p-fluid">
+        <form @submit.prevent="handleSubmit()">
           <div class="p-fluid">
             <div class="field" v-if="userRole === 'USER_ROLE'">
               <label for="lastname">Last Name</label>
@@ -34,7 +34,22 @@
             </div>
             <div class="field">
               <label for="phone">Phone</label>
-              <InputMask id="phone" mask="(999) 999-9999" v-model="getProfileInfo.phone" :value="getProfileInfo.phone" placeholder="(999) 999-9999" />
+              <InputMask id="phone" mask="8(999)-999-99-99" v-model="getProfileInfo.phone" :value="getProfileInfo.phone" placeholder="+9(999) 999-9999" />
+            </div>
+            <div class="field" v-if="userRole === 'COMPANY_ROLE'">
+              <label for="companyName">Address</label>
+              <InputText id="companyName" v-model="getProfileInfo.companyName" :value="getProfileInfo.companyName"/>
+            </div>
+            <div class="textarea">
+              <label for="about">
+                About 
+                <span v-if="userRole === 'COMPANY_ROLE'">company</span>
+                <span v-else>me</span>
+              </label>
+              <Textarea id="about" v-model="getProfileInfo.about" 
+                :value="getProfileInfo.about" autoResize
+                placeholder="Start typing here"
+              />
             </div>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon">
@@ -69,13 +84,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, computed, ref } from 'vue'
+  import { defineComponent, computed, ref } from 'vue'
   import { profileModuleStore } from '@/store/profileModule'
   import { authModuleStore } from '@/store/authModule'
   import { useToast } from 'primevue/usetoast'
   import Spinner from '../../components/spinner/Spinner.vue';
   import InputText from 'primevue/inputtext'
   import InputMask from 'primevue/inputmask'
+  import Textarea from 'primevue/textarea'
   import Divider from 'primevue/divider'
   import Button from 'primevue/button'
   import Toast from 'primevue/toast'
@@ -85,6 +101,7 @@
     components: {
       InputText,
       InputMask,
+      Textarea,
       Divider,
       Spinner,
       Button,
@@ -100,6 +117,8 @@
       const profileInfo: any = computed(() => profileData.getStorageInfo)
       const currentUser = computed(() => authUserStore.getCurrentUser)
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))
+
+      profileData.getUserInfo(currentUser.value)
 
       const submitted = ref(false)
       const errorMessage = ref('')
@@ -140,6 +159,7 @@
           userTelegram: getProfileInfo.value.userTelegram,
           userLinkedIn: getProfileInfo.value.userLinkedIn,
           phone: getProfileInfo.value.phone,
+          about: getProfileInfo.value.about
         } as any
         profileData.userProfileUpdate(userInfo).then(
           () => {
@@ -155,10 +175,6 @@
           },
         )
       }
-
-      onMounted(async () => {
-        await profileData.getUserInfo(currentUser.value)
-      }) 
 
       return {
         getProfileInfo,
@@ -202,32 +218,49 @@
   }
 
   .about-details__header-text {
-    margin: 15px 30px 0 15px;
+    margin: 20px 30px -14px 15px;
     color: #23272a;
     font-size: x-large;
   }
 
-  .about-details__content {
+  .p-fluid {
     display: flex;
-    flex-direction: column;
-    margin-left: 0 auto;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
   }
 
   .field {
-    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    margin-bottom: 0.8em;
   }
 
-  .field>label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .p-fluid .p-inputtext {
+  .textarea {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0.8em;
     width: 100%;
   }
 
+  .textarea>label {
+    margin-bottom: 0.3em;
+    font-size: 14px;
+  }
+
+  .field>label {
+    margin-bottom: 0.3em;
+    font-size: 14px;
+  }
+
+  .p-fluid .p-inputtext {
+    font-size: 14px;
+    padding: 12px 12px;
+  }
+
   .p-inputgroup {
-    margin-top: 20px;
+    margin-top: 14px;
     width: 100%;
   }
 

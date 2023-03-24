@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, ref, computed } from 'vue'
+  import { defineComponent, ref, computed } from 'vue'
   import { vacancyModuleStore } from '../../store/vacancyModule';
   import Spinner from '../../components/spinner/Spinner.vue';
   import VacancyList from '../../components/vacancy/VacancyList.vue'
@@ -35,6 +35,8 @@
       const vacancyStoreData = vacancyModuleStore()
       const compName = ref('')
 
+      vacancyStoreData.getDataFromApi()
+
       const filterByCompName = (allVacancy: any) => {
         return compName.value
           ? allVacancy.filter(
@@ -47,10 +49,6 @@
         return filterByCompName(
           vacancyStoreData.$state.data
         )
-      })
-
-      onMounted(async function() {
-        await vacancyStoreData.getDataFromApi()
       })
 
       return { filterAllVacancy, compName, vacancyStoreData }

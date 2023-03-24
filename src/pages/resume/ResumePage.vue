@@ -22,11 +22,11 @@
           </div>
           <div class="single__header-left-content">
             <Avatar v-if="resumeStore.resume.gender === 'Male'" 
-              image="http://localhost:5173/src/assets/man-avatar-icon-free-vector.webp" 
+              image="http://localhost:5173/src/assets/man-avatar.png" 
               style="width: 150px; height: 150px;"
             />
             <Avatar v-if="resumeStore.resume.gender === 'Female'" 
-              image="http://localhost:5173/src/assets/womanava.jpg" 
+              image="http://localhost:5173/src/assets/womanava.png" 
               style="width: 150px; height: 150px;"
             />
           </div>
@@ -89,7 +89,7 @@
         </div>
       </article>
       <div class="resume-actions">
-        <i class="pi pi-download action-btn" @click="exportToPDF()"></i>
+        <i class="pi pi-download action-btn"></i>
         <Divider layout="vertical"/>
         <i class="pi pi-pencil action-btn"></i>
       </div>
@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, computed, ref } from 'vue'
+  import { defineComponent, computed } from 'vue'
   import { resumeModuleStore } from '@/store/resumeModule'
   import { authModuleStore } from '@/store/authModule'
   import { profileModuleStore } from '@/store/profileModule'
@@ -127,27 +127,10 @@
       const profileInfo = computed(() => profileStore.getProfileInfo)
       const currentUser = computed(() => authUserStore.getCurrentUser)
 
-      function exportToPDF () {
-        const { jsPDF } = window.jspdf 
-
-        var doc = new jsPDF('l', 'mm', 'a4');
-        var pdfjs = document.getElementById('resume-document');
-
-        doc.html(pdfjs, {
-          callback: function(doc: any) {
-            doc.save("newpdf.pdf");
-          },
-          // x: 12,
-          // y: 12
-        });   
-			}
-
-      onMounted(async () => {
-        await resumeStore.getResumeWithId(props.id)
-        await profileStore.getUserInfo(currentUser.value)
-      })
+      resumeStore.getResumeWithId(props.id)
+      profileStore.getUserInfo(currentUser.value)
+      
       return {
-        exportToPDF,
         resumeStore,
         profileInfo,
         document,

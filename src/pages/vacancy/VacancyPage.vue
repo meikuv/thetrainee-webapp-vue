@@ -70,7 +70,7 @@
         </a>
       </div>
       <div class="widget-text small">
-        Kaspi.kz – это суперприложение, в котором собраны самые разные сервисы для ежедневных потребностей.
+        {{ profileStore.profileInfo.about }}
       </div>
       <div class="about-company-jobs">
         <div class="about-company-jobs-list">
@@ -122,6 +122,7 @@
   import Dialog from 'primevue/dialog'
   import Button from 'primevue/button'
   import Toast from 'primevue/toast'
+import { profileModuleStore } from '@/store/profileModule'
 
   export default defineComponent({  
     components: {
@@ -146,11 +147,14 @@
       const confirm = useConfirm()
       const authUserStore = authModuleStore()
       const resumeStore = resumeModuleStore()
+      const profileStore = profileModuleStore()
       const vacancyStoreData = vacancyModuleStore()
-      vacancyStoreData.getDataWithID(props.id)
       const userRole = computed(() => JSON.parse(authUserStore.getUserRole))
       const currentUser = computed(() => authUserStore.currentUser)
+      
+      profileStore.getUserInfo(currentUser.value)
       resumeStore.getUserResumes(currentUser.value)
+      vacancyStoreData.getDataWithID(props.id)
 
       const items = [
         {
@@ -184,7 +188,6 @@
             deleteVacancy(id)
           },
           reject: () => {
-            showMessage('error', 'Rejected', 'You have rejected', 2000)
           }
         })
       }
@@ -195,7 +198,7 @@
             showMessage('info', 'Confirmed', 'Vacancy deleted', 2000)
           },
           error => {
-            showMessage('error', 'Error Message', 'Something wrong !', 3000)
+            showMessage('error', 'Error Message', 'Something wrong !', 2000)
           }
         )
       }
@@ -230,6 +233,7 @@
       return { 
         vacancyStoreData,
         respondVacancy,
+        profileStore,
         displayModal,
         resumeStore,
         currentUser,

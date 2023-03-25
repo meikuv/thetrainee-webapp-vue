@@ -18,6 +18,7 @@ export interface IResumeItem {
 }
 
 export interface IWorkExperiences {
+  deleted: string
   startDate: string
   endDate: string
   organization: string
@@ -30,12 +31,15 @@ export interface IStudyPlaces {
   faculty: string
   specialization: string
   gradYear: string
+  deleted: string
 }
 
 export interface ILanguages {
   language: number
+  deleted: string
 }
 
 export interface ICoreSkills {
   skill: string
+  deleted: string
 }

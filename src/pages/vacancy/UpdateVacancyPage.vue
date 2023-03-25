@@ -206,8 +206,8 @@
       const authUserStore = authModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
 
-      vacancyStore.getDataWithID(props.id)
       const vacancyUpd = JSON.parse(<string>sessionStorage.getItem('vacancy'))
+      vacancyStore.getDataWithID(props.id)
 
       const errorMessage = ref('')
       const submitted = ref(false)
@@ -326,15 +326,17 @@
         } as any
         vacancyStore.updateVacancy(vacancy).then(
           () => {
-            showMessage('success', 'Success Message', 'Updated successfully !', 3000)
-            router.push({
-              name: 'myVacancy'
-            })
+            showMessage('success', 'Success Message', 'Updated successfully !', 2000)
+            setTimeout(() => {
+              router.push({
+                name: 'myVacancy'
+              })
+            }, 600)
           },
           error => {
             errorMessage.value =
               (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-            showMessage('error', 'Error Message', errorMessage.value, 3000)
+            showMessage('error', 'Error Message', errorMessage.value, 2000)
           },
         )
       }

@@ -1,6 +1,6 @@
 <template>
   <Toast :baseZIndex="100000001"/>
-  <Card style="width: 55em; margin-left: 50px; padding: 0px 24px 0 24px;">
+  <Card style="width: 50em; margin-left: 50px; padding: 0px 24px 0 24px;">
     <template #header>
       <div class="resume__header">
         <h4 class="resume__header-text">Create Resume</h4>
@@ -8,6 +8,9 @@
     </template>
     <template #title>
       <Divider />
+    </template>
+    <template #subtitle>
+      <span style="font-size: 12px;">If you want to leave your resume as it is, reload the page or click "Back"</span>
     </template>
     <template #content>
       <div class="resume__content">
@@ -109,12 +112,11 @@
             </div>
             <h3>Work experience</h3>
             <div class="block-column">
-              <label for="work-exp" class="block-label" :class="{'p-error': v$.workExps.$invalid && submitted}">Places of work</label>
+              <label for="work-exp" class="block-label">Places of work</label>
               <Button
                 id="work-exp"
                 class="btn_list" 
                 label="Add a place of work"
-                :class="{'p-invalid': v$.workExps.$invalid && submitted}"
                 @click="openModal()"
               />
             </div>
@@ -129,7 +131,7 @@
                   <b>{{ work.organization }}</b> 
                   {{ work.position }} 
                 </div>
-                <i class="pi pi-trash" style="font-size: 12px; margin: 5px 5px;" @click="deleteElement('workExp', index)"></i>
+                <i class="pi pi-trash" style="font-size: 12px; margin: 5px 5px;" @click="deleteElement('workExp', index, work.id)"></i>
               </div>
             </div>
             <div class="block-column">
@@ -144,12 +146,12 @@
               />
             </div>
             <div class="block-column">
-              <label for="skill-name" class="block-label" :class="{'p-error': v$.keySkills.$invalid && submitted}">Core Skills</label>
+              <label for="skill-name" class="block-label" :class="{'p-error': v$.coreSkills.$invalid && submitted}">Core Skills</label>
               <form class="form_list" @submit.prevent="addNew('skills')">
                 <InputText 
                   id="skill-name" 
                   class="inputs_second input_list"
-                  :class="{'p-invalid': v$.keySkills.$invalid && submitted}"
+                  :class="{'p-invalid': v$.coreSkills.$invalid && submitted}"
                   placeholder="Start typing here"
                   v-model="skill"
                 />
@@ -157,9 +159,9 @@
               </form>
             </div>
             <div class="skill_wrapper">
-              <span class="skill-badge" v-for="(skill, index) in v$.keySkills.$model" :key="index">
+              <span class="skill-badge" v-for="(skill, index) in v$.coreSkills.$model" :key="index">
                 {{ skill.skill }} 
-                <i class="pi pi-trash" style="font-size: 10px; margin-left: 2px;" @click="deleteElement('skills', index)"></i>
+                <i class="pi pi-trash" style="font-size: 10px; margin-left: 2px;" @click="deleteElement('skills', index, skill.id)"></i>
               </span>
             </div>
             <h3>Education</h3>
@@ -193,7 +195,7 @@
                     <span>{{ study.gradYear }}</span>
                   </div>
                 </div>
-                <i class="pi pi-trash" style="font-size: 12px; margin: 5px 5px;" @click="deleteElement('studyPlace', index)"></i>
+                <i class="pi pi-trash" style="font-size: 12px; margin: 5px 5px;" @click="deleteElement('studyPlace', index, study.id)"></i>
               </div>
             </div>
             <div class="block-column">
@@ -212,10 +214,13 @@
             <div class="skill_wrapper">
               <span class="skill-badge" v-for="(language, index) in v$.languages.$model" :key="index">
                 {{ language.language }} 
-                <i class="pi pi-trash" style="font-size: 10px; margin-left: 2px;" @click="deleteElement('language', index)"></i>
+                <i class="pi pi-trash" style="font-size: 10px; margin-left: 2px;" @click="deleteElement('language', index, language.id)"></i>
               </span>
             </div>
           </div>
+          <router-link :to="{ name: 'myResumes'}" v-slot="{navigate}">
+            <Button class="btn_submit" label="Back" style="margin-right: 8px;" @click="navigate"/>
+          </router-link>
           <Button type="submit" class="btn_submit" label="Edit and Publish" />
         </form>
       </div>
@@ -327,9 +332,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, reactive, ref } from 'vue'
+  import { defineComponent, computed, reactive, ref, onMounted } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { resumeModuleStore } from '@/store/resumeModule'
+  import { addKeyAndValue } from '@/utils/addToArrObject'
   import { useRouter } from 'vue-router'
   import { useToast } from 'primevue/usetoast'
   import { required } from '@vuelidate/validators'
@@ -345,6 +351,7 @@
   import Button from 'primevue/button'
   import Toast from 'primevue/toast'
   import Card from 'primevue/card'
+import { stat } from 'fs'
 
   export default defineComponent({
     props: {
@@ -378,8 +385,8 @@
       const resumeStore = resumeModuleStore()
       const currentUser = computed(() => authUserStore.getCurrentUser)
       
-      resumeStore.getResumeWithId(props.id)
       const resumeUpd = JSON.parse(<string>sessionStorage.getItem('resume'))
+      const storageResume = JSON.parse(<string>sessionStorage.getItem('resume'))
       
       const selectGender = ref([
         { name: 'Male', code: 'Male' },
@@ -392,20 +399,21 @@
       ])
 
       const state = reactive({
-        firstName: resumeUpd.firstName,
-        lastName: resumeUpd.lastName,
-        phone: resumeUpd.phone,
-        city: resumeUpd.city,
-        gender: resumeUpd.gender,
-        birthDate: resumeUpd.birthDate,
-        position: resumeUpd.position,
-        salary: resumeUpd.salary,
-        salaryMode: resumeUpd.salaryMode,
-        aboutMe: resumeUpd.aboutMe,
-        keySkills: resumeUpd.coreSkills,
-        languages: resumeUpd.languages,
-        workExps: resumeUpd.workExps,
-        studyPlaces: resumeUpd.studyPlaces,
+        id: resumeUpd.id,
+        firstName: storageResume.firstName,
+        lastName: storageResume.lastName,
+        phone: storageResume.phone,
+        city: storageResume.city,
+        gender: storageResume.gender,
+        birthDate: storageResume.birthDate,
+        position: storageResume.position,
+        salary: storageResume.salary,
+        salaryMode: storageResume.salaryMode,
+        aboutMe: storageResume.aboutMe,
+        coreSkills: storageResume.coreSkills,
+        languages: storageResume.languages,
+        workExps: storageResume.workExps,
+        studyPlaces: storageResume.studyPlaces,
       })
 
       const rules = {
@@ -419,9 +427,9 @@
         salaryMode: '',
         salary: '',
         aboutMe: { required },  
-        keySkills: { required },
+        coreSkills: { required },
         languages: { required },
-        workExps: { required },
+        workExps: [] as any,
         studyPlaces: { required },
       }
 
@@ -453,23 +461,6 @@
         faculty: { required },
         specialization: { required },
         gradYear: { required },
-      }
-
-      const resetForm = () => {
-          state.firstName = ''
-          state.birthDate = ''
-          state.city = ''
-          state.lastName = ''
-          state.gender = ''
-          state.position = ''
-          state.phone = ''
-          state.aboutMe = ''
-          state.salary = null
-          state.keySkills = []
-          state.languages = []
-          state.studyPlaces = []
-          state.workExps = []
-          submitted.value = false
       }
 
       const resetWorkForm = () => {
@@ -506,26 +497,45 @@
         if (name === 'skills') {
           if (skill.value !== '') {
             let bskill = { skill: skill.value }
-            state.keySkills.push(bskill)
+            state.coreSkills.push(bskill)
+            resumeUpd.coreSkills.push(bskill)
           }
           skill.value = ''
         } else if (name === 'language') {
           if (language.value !== '') {
             let lang = { language: language.value }
             state.languages.push(lang)
+            resumeUpd.languages.push(lang)
           }
           language.value = ''
         }
       }
 
-      const deleteElement = (name:any, index:number) => {
+      const deleteElement = (name:any, index:number, id:number) => {
         if (name === 'skills') {
-          state.keySkills.splice(index, 1)
+          if (Object.keys(state.coreSkills).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more skill to delete', 2000)
+            return
+          }
+          resumeUpd.coreSkills = addKeyAndValue(resumeUpd.coreSkills, 'deleted', 'Y', id)
+          state.coreSkills.splice(index, 1)
         } else if (name === 'language') {
+          if (Object.keys(state.languages).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more language to delete', 2000)
+            return
+          }
+          console.log(resumeUpd.languages)
+          resumeUpd.languages = addKeyAndValue(resumeUpd.languages, 'deleted', 'Y', id)
           state.languages.splice(index, 1)
         } else if (name === 'workExp') {
+          resumeUpd.workExps = addKeyAndValue(resumeUpd.workExps, 'deleted', 'Y', id)
           state.workExps.splice(index, 1)
         } else if (name === 'studyPlace') {
+          if (Object.keys(state.studyPlaces).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more study place to delete', 2000)
+            return
+          }
+          resumeUpd.studyPlaces = addKeyAndValue(resumeUpd.studyPlaces, 'deleted', 'Y', id)
           state.studyPlaces.splice(index, 1)
         }
       }
@@ -540,18 +550,23 @@
 
       const handleSubmit = (isFormValid: boolean) => {
         submitted.value = true
-        if (!isFormValid) {
-          showMessage('error', 'Error Message', 'Fill in the required fields1', 3000)
+        let storageResume = JSON.parse(<string>sessionStorage.getItem('resume'))
+        if (_.isEqual(state, storageResume)) {
+          showMessage('info', 'Info Message', 'Nothing changed !', 2000)
+          return
+        } 
+        else if (!isFormValid) {
+          showMessage('error', 'Error Message', 'Fill in the required fields', 3000)
           return
         }
 
-        createResume()
+        updateResume()
       }
 
       const handleWorkSubmit = (isFormValid: boolean) => {
         submitWorkModal.value = true
         if (!isFormValid) {
-          showMessage('error', 'Error Message', 'Fill in the required fields2', 3000)
+          showMessage('error', 'Error Message', 'Fill in the required fields', 3000)
           return
         }
         let workExp = { 
@@ -563,6 +578,7 @@
         }
 
         state.workExps.push(workExp)
+        resumeUpd.workExps.push(workExp)
 
         displayModal.value = false;
         resetWorkForm()
@@ -571,7 +587,7 @@
       const handleStudySubmit = (isFormValid: boolean) => {
         submitStudyModal.value = true
         if (!isFormValid) {
-          showMessage('error', 'Error Message', 'Fill in the required fields3', 3000)
+          showMessage('error', 'Error Message', 'Fill in the required fields', 3000)
           return
         }
         let studyPlace = {
@@ -582,32 +598,35 @@
         }
 
         state.studyPlaces.push(studyPlace)
+        resumeUpd.studyPlaces.push(studyPlace)
 
         displayStudyModal.value = false;
         resetStudyForm()
       }
 
-      function createResume() {
+      function updateResume() {
+        console.log(resumeUpd)
         const resume = {
+          id: resumeUpd.id,
           username: currentUser.value,
           firstName: state.firstName,
           lastName: state.lastName,
           phone: state.phone,
           city: state.city,
           gender: state.gender,
-          birthDate: state.birthDate.toLocaleDateString('pt-PT'),
+          birthDate: typeof state.birthDate === 'object' ? state.birthDate.toLocaleDateString('pt-PT') : state.birthDate,
           position: state.position,
           salary: state.salary === 0 ? null : state.salary,
           salaryMode: state.salaryMode,
           aboutMe: state.aboutMe,
-          coreSkills: state.keySkills,
-          workExperiences: state.workExps,
-          studyPlaces: state.studyPlaces,
-          languages: state.languages,
+          coreSkills: resumeUpd.coreSkills,
+          workExperiences: resumeUpd.workExps,
+          studyPlaces: resumeUpd.studyPlaces,
+          languages: resumeUpd.languages,
         } as any
-        resumeStore.createResume(resume).then(
+        resumeStore.updateResume(resume).then(
           () => {
-            showMessage('success', 'Success Message', 'Created successfully !', 3000)
+            showMessage('success', 'Success Message', 'Updated successfully !', 3000)
             setTimeout(() => {
               router.push({
                 name: 'myResumes'
@@ -643,6 +662,7 @@
         language,
         addNew,
         skill,
+        state,
         v$,
         s$,
         k$,

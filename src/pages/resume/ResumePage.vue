@@ -37,7 +37,7 @@
             <h4 style="margin-bottom: 5px;">{{ resumeStore.resume.position }}</h4>
             <span class="salary">{{ resumeStore.resume.salary }} {{ resumeStore.resume.salaryMode }}</span>
           </div>
-          <div class="work-exp">
+          <div class="work-exp" v-if="resumeStore.resume.workExps">
             <h5 class="text-gray">Work experience</h5>
             <div class="work-study-element" v-for="(work, index) in resumeStore.resume.workExps" :key="index">
               <div class="element-left">
@@ -92,7 +92,7 @@
         <i class="pi pi-download action-btn"></i>
         <Divider layout="vertical"/>
         <router-link :to="{ name: 'updResumePage', params: { id: resumeStore.resume.id } }" v-slot="{navigate}">
-          <i class="pi pi-pencil action-btn" @click="{navigate}"></i>
+          <i class="pi pi-pencil action-btn" @click="{navigate}" style="text-decoration: none;"></i>
         </router-link>
       </div>
     </div>

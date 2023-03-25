@@ -109,12 +109,11 @@
             </div>
             <h3>Work experience</h3>
             <div class="block-column">
-              <label for="work-exp" class="block-label" :class="{'p-error': v$.workExps.$invalid && submitted}">Places of work</label>
+              <label for="work-exp" class="block-label">Places of work</label>
               <Button
                 id="work-exp"
                 class="btn_list" 
                 label="Add a place of work"
-                :class="{'p-invalid': v$.workExps.$invalid && submitted}"
                 @click="openModal()"
               />
             </div>
@@ -411,7 +410,7 @@
         aboutMe: { required },  
         keySkills: { required },
         languages: { required },
-        workExps: { required },
+        workExps: [] as any,
         studyPlaces: { required },
       }
 

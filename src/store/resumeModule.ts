@@ -111,6 +111,33 @@ export const resumeModuleStore = defineStore('resume', {
         },
       )
     },
+    updateResume(resume: {
+      id: number,
+      username: string,
+      firstName: string,
+      lastName: string,
+      phone: string,
+      city: string,
+      gender: string,
+      birthDate: string,
+      position: string,
+      salary: string,
+      salaryMode: string,
+      aboutMe: string,
+      coreSkills: any,
+      workExperiences: any,
+      studyPlaces: any,
+      languages: any,
+    }) {
+      return ResumeService.updateResume(resume)
+      .then(resume => {
+        return Promise.resolve(resume)
+      },
+      error => {
+        return Promise.reject(error)
+      },
+    )
+    },
     deleteResume(id: number) {
       return ResumeService.deleteResume(id)
     },

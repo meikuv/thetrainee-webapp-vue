@@ -85,6 +85,13 @@ const routes = [
         meta: { authorize: ['USER_ROLE'] } 
       },
       {
+        path: 'updateResume/:id',
+        name: 'updResumePage',
+        component: (): Promise<RouteComponent> => import('@pages/resume/UpdateResumePage.vue'),
+        props: castRouteParams,
+        meta: { authorize: ['USER_ROLE'] },
+      },
+      {
         path: 'myResponds',
         name: 'myResponds',
         component: (): Promise<RouteComponent> => import('@/pages/profile/UserRespondsSubPage.vue'),

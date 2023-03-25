@@ -5,6 +5,7 @@
   animation: show 0.3s 1;
   animation-fill-mode: forwards;
   animation-delay: 0.3s;
+  height: max-content;
 }
 
 @keyframes show {
@@ -54,24 +55,29 @@
 .inputs_first {
   margin-left: 40px;
   width: 20em;
+  font-size: 14px;
 }
 
 .inputs_second {
   width: 15em;
   margin-left: 40px;
+  font-size: 14px;
 }
 
 .input_third {
   margin-left: 40px;
   width: 12em;
+  font-size: 14px;
 }
 
 .inputs_fourth {
   width: 20em;
+  font-size: 14px;
 }
 
 .inputs_fifth {
   width: 15em;
+  font-size: 14px;
   font-size: 14px;
 }
 

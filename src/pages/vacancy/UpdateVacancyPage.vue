@@ -208,8 +208,6 @@
 
       vacancyStore.getDataWithID(props.id)
       const vacancyUpd = JSON.parse(<string>sessionStorage.getItem('vacancy'))
-      console.log(vacancyUpd.skills)
-
 
       const errorMessage = ref('')
       const submitted = ref(false)
@@ -316,11 +314,11 @@
 
       function updateVacancy() {
         const vacancy = {
-          id: vacancyUpd.id,
+          id: vacancyStore.vacancy.id,
           username: currentUser.value,
-          companyName: vacancyUpd.companyName,
-          jobName: vacancyUpd.jobName,
-          city: vacancyUpd.city,
+          companyName: vacancyStore.vacancy.companyName,
+          jobName: vacancyStore.vacancy.jobName,
+          city: vacancyStore.vacancy.city,
           basicSkills: vacancyUpd.skills,
           requirements: vacancyUpd.requirements,
           dependencies: vacancyUpd.dependencies,

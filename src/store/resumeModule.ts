@@ -76,6 +76,7 @@ export const resumeModuleStore = defineStore('resume', {
         }
         
         this.resume = newObject
+        sessionStorage.setItem('resume', JSON.stringify(newObject))
         this.apiDeliveredStatus = 'success'
         setTimeout(() => {
           this.changeLoaderActive(false)

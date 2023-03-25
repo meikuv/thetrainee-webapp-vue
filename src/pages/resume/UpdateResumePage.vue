@@ -1,6 +1,6 @@
 <template>
   <Toast :baseZIndex="100000001"/>
-  <Card style="width: 60em; margin-left: 50px; padding: 0px 24px 0 24px;">
+  <Card style="width: 55em; margin-left: 50px; padding: 0px 24px 0 24px;">
     <template #header>
       <div class="resume__header">
         <h4 class="resume__header-text">Create Resume</h4>
@@ -216,7 +216,7 @@
               </span>
             </div>
           </div>
-          <Button type="submit" class="btn_submit" label="Create and Publish" />
+          <Button type="submit" class="btn_submit" label="Edit and Publish" />
         </form>
       </div>
     </template>
@@ -347,6 +347,12 @@
   import Card from 'primevue/card'
 
   export default defineComponent({
+    props: {
+      id: {
+        type: Number,
+        required: true,
+      },
+    },
     components: {
       RadioButton,
       InputText,
@@ -360,17 +366,21 @@
       Toast,
       Card,
     },
-    setup() {
-      const toast = useToast()
-      const router = useRouter()
-      const authUserStore = authModuleStore()
-      const resumeStore = resumeModuleStore()
-      const currentUser = computed(() => authUserStore.getCurrentUser)
+    setup(props: any) {
       const skill = ref('')
       const language = ref('')
       const displayModal = ref(false)
       const displayStudyModal = ref(false)
       const errorMessage = ref('')
+      const toast = useToast()
+      const router = useRouter()
+      const authUserStore = authModuleStore()
+      const resumeStore = resumeModuleStore()
+      const currentUser = computed(() => authUserStore.getCurrentUser)
+      
+      resumeStore.getResumeWithId(props.id)
+      const resumeUpd = JSON.parse(<string>sessionStorage.getItem('resume'))
+      
       const selectGender = ref([
         { name: 'Male', code: 'Male' },
         { name: 'Female', code: 'Female' },
@@ -382,20 +392,20 @@
       ])
 
       const state = reactive({
-        firstName: '',
-        lastName: '',
-        phone: '',
-        city: '',
-        gender: '',
-        birthDate: '',
-        position: 'Novice specialist',
-        salary: null,
-        salaryMode: 'KZT',
-        aboutMe: '',
-        keySkills: [] as any,
-        languages: [] as any,
-        workExps: [] as any,
-        studyPlaces: [] as any,
+        firstName: resumeUpd.firstName,
+        lastName: resumeUpd.lastName,
+        phone: resumeUpd.phone,
+        city: resumeUpd.city,
+        gender: resumeUpd.gender,
+        birthDate: resumeUpd.birthDate,
+        position: resumeUpd.position,
+        salary: resumeUpd.salary,
+        salaryMode: resumeUpd.salaryMode,
+        aboutMe: resumeUpd.aboutMe,
+        keySkills: resumeUpd.coreSkills,
+        languages: resumeUpd.languages,
+        workExps: resumeUpd.workExps,
+        studyPlaces: resumeUpd.studyPlaces,
       })
 
       const rules = {

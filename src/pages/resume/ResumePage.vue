@@ -91,7 +91,9 @@
       <div class="resume-actions">
         <i class="pi pi-download action-btn"></i>
         <Divider layout="vertical"/>
-        <i class="pi pi-pencil action-btn"></i>
+        <router-link :to="{ name: 'updResumePage', params: { id: resumeStore.resume.id } }" v-slot="{navigate}">
+          <i class="pi pi-pencil action-btn" @click="{navigate}"></i>
+        </router-link>
       </div>
     </div>
   </div>

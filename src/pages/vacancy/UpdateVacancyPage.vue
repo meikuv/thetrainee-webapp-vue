@@ -13,6 +13,9 @@
       <template #title>
         <Divider />
       </template>
+      <template #subtitle>
+        <span style="font-size: 12px;">If you want to leave your vacancy as it is, reload the page or click "Back"</span>
+      </template>
       <template #content>
         <div class="vacancy__content"> 
           <form @submit.prevent="handleSubmit()">
@@ -67,12 +70,14 @@
                   <Button class="btn_list" label="Add skill" type="submit"/>
                 </form>
                 <ul class="ul_list">
-                  <li v-for="(skill, index) in vacancyStore.vacancy.skills" :key="index" class="li_list">
-                    {{ skill.skill }} 
-                    <span @click="deleteElement('skills' ,index)">
-                      <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
-                    </span>
-                  </li>
+                  <div v-for="(skill, index) in vacancyStore.vacancy.skills" :key="index" >
+                    <li v-if="!skill.deleted" class="li_list">
+                      {{ skill.skill }} 
+                      <span @click="deleteElement('skills' ,index, skill.id)">
+                        <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
+                      </span>
+                    </li>
+                  </div>
                 </ul>
               </div>
               <div class="field">
@@ -89,12 +94,14 @@
                   <Button class="btn_list" label="Add requirement" type="submit"/>
                 </form>
                 <ul class="ul_list">
-                  <li v-for="(req, index) in vacancyStore.vacancy.requirements" :key="index" class="li_list">
-                    {{ req.reqName}} 
-                    <span @click="deleteElement('require', index)">
-                      <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
-                    </span>
-                  </li>
+                  <div v-for="(req, index) in vacancyStore.vacancy.requirements" :key="index">
+                    <li v-if="!req.deleted" class="li_list">
+                      {{ req.reqName}} 
+                      <span @click="deleteElement('require', index, req.id)">
+                        <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
+                      </span>
+                    </li>
+                  </div>
                 </ul>
               </div>
               <div class="field">
@@ -111,12 +118,14 @@
                   <Button class="btn_list" label="Add dependency" type="submit"/>
                 </form>
                 <ul class="ul_list">
-                  <li v-for="(dep, index) in vacancyStore.vacancy.dependencies" :key="index" class="li_list">
-                    {{ dep.depName }} 
-                    <span @click="deleteElement('dependency', index)">
-                      <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
-                    </span>
-                  </li>
+                  <div v-for="(dep, index) in vacancyStore.vacancy.dependencies" :key="index">
+                    <li v-if="!dep.deleted" :key="index" class="li_list">
+                      {{ dep.depName }} 
+                      <span @click="deleteElement('dependency', index, dep.id)">
+                        <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
+                      </span>
+                    </li>
+                  </div>
                 </ul>
               </div>
               <div class="field">
@@ -133,12 +142,14 @@
                   <Button class="btn_list" label="Add condition" type="submit"/>
                 </form>
                 <ul class="ul_list">
-                  <li v-for="(con, index) in vacancyStore.vacancy.conditions" :key="index" class="li_list">
-                    {{ con.conName }} 
-                    <span @click="deleteElement('condition', index)">
-                      <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
-                    </span>
-                  </li>
+                  <div v-for="(con, index) in vacancyStore.vacancy.conditions" :key="index">
+                    <li v-if="!con.deleted" class="li_list">
+                      {{ con.conName }} 
+                      <span @click="deleteElement('condition', index, con.id)">
+                        <i class="pi pi-trash" style="color: red; font-size: 12px;"></i>
+                      </span>
+                    </li>
+                  </div>
                 </ul>
               </div>
             </div>
@@ -157,6 +168,7 @@
   import { defineComponent, computed, ref } from 'vue'
   import { authModuleStore } from '@/store/authModule'
   import { vacancyModuleStore } from '@/store/vacancyModule'
+  import { addKeyAndValue } from '@/utils/addToArrObject'
   import { useRouter } from 'vue-router'
   import { useToast } from 'primevue/usetoast'
   import Spinner from '@/components/spinner/Spinner.vue'
@@ -195,6 +207,9 @@
       const currentUser = computed(() => authUserStore.getCurrentUser)
 
       vacancyStore.getDataWithID(props.id)
+      const vacancyUpd = JSON.parse(<string>sessionStorage.getItem('vacancy'))
+      console.log(vacancyUpd.skills)
+
 
       const errorMessage = ref('')
       const submitted = ref(false)
@@ -218,12 +233,14 @@
         if (name === 'skills') {
           if (bSkill) {
             let skill = { skill: bSkill.value }
+            vacancyUpd.skills.push(skill)
             vacancyStore.vacancy.skills.push(skill)
           }
           bSkill.value = ''
         } else if (name === 'require') {
           if (reqName) {
             let req = { reqName: reqName.value }
+            vacancyUpd.requirements.push(req)
             vacancyStore.vacancy.requirements.push(req)
           }
           reqName.value = ''
@@ -231,26 +248,48 @@
         } else if (name === 'dependency') {
           if (depName) {
             let dep = { depName: depName.value }
+            vacancyUpd.dependencies.push(dep)
             vacancyStore.vacancy.dependencies.push(dep)
           }
           depName.value = ''
         } else {
           if (conName) {
             let con = { conName: conName.value }
+            vacancyUpd.conditions.push(con)
             vacancyStore.vacancy.conditions.push(con)
           }
           conName.value = ''
         }
       }
 
-      const deleteElement = (name:any, index:number) => {
+      const deleteElement = (name:any, index:number, id: number) => {
         if (name === 'skills') {
+          if (Object.keys(vacancyStore.vacancy.skills).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more skill to delete', 2000)
+            return
+          }
+          vacancyUpd.skills = addKeyAndValue(vacancyUpd.skills, 'deleted', 'Y', id)
           vacancyStore.vacancy.skills.splice(index, 1)
         } else if (name === "require") {
+          if (Object.keys(vacancyStore.vacancy.requirements).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more requirement to delete', 2000)
+            return
+          }
+          vacancyUpd.requirements = addKeyAndValue(vacancyUpd.requirements, 'deleted', 'Y', id)
           vacancyStore.vacancy.requirements.splice(index, 1)
         } else if (name === 'dependency') {
+          if (Object.keys(vacancyStore.vacancy.dependencies).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more dependency to delete', 2000)
+            return
+          }
+          vacancyUpd.dependencies = addKeyAndValue(vacancyUpd.dependencies, 'deleted', 'Y', id)
           vacancyStore.vacancy.dependencies.splice(index, 1)
         } else {
+          if (Object.keys(vacancyStore.vacancy.conditions).length === 1) {
+            showMessage('info', 'Info Message', 'Add one more condition to delete', 2000)
+            return
+          }
+          vacancyUpd.conditions = addKeyAndValue(vacancyUpd.conditions, 'deleted', 'Y', id)
           vacancyStore.vacancy.conditions.splice(index, 1)
         }
       }
@@ -277,15 +316,15 @@
 
       function updateVacancy() {
         const vacancy = {
-          id: vacancyStore.vacancy.id,
+          id: vacancyUpd.id,
           username: currentUser.value,
-          companyName: vacancyStore.vacancy.companyName,
-          jobName: vacancyStore.vacancy.jobName,
-          city: vacancyStore.vacancy.city,
-          basicSkills: vacancyStore.vacancy.skills,
-          requirements: vacancyStore.vacancy.requirements,
-          dependencies: vacancyStore.vacancy.dependencies,
-          conditions: vacancyStore.vacancy.conditions,
+          companyName: vacancyUpd.companyName,
+          jobName: vacancyUpd.jobName,
+          city: vacancyUpd.city,
+          basicSkills: vacancyUpd.skills,
+          requirements: vacancyUpd.requirements,
+          dependencies: vacancyUpd.dependencies,
+          conditions: vacancyUpd.conditions,
         } as any
         vacancyStore.updateVacancy(vacancy).then(
           () => {

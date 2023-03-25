@@ -1,16 +1,20 @@
 export interface ISkill {
+  deleted: string
   skill: string
 }
 
 export interface IRequirements {
+  deleted: string
   reqName: string
 }
 
 export interface IDependencies {
+  deleted: string
   depName: string
 }
 
 export interface IWorkConditions {
+  deleted: string
   conName: string
 }
 
